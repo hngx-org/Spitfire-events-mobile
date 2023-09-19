@@ -5,7 +5,7 @@ const EventItem = () => {
     <View style = {styles.box}>
       <View style = {{marginRight: 10}}>
         <Image
-          source = {require("../assets/images/cartoon.png")}
+          source = {require("../../assets/images/cartoon.png")}
           style = {{width: 50, height: 50}}
         />
       </View>
@@ -18,7 +18,7 @@ const EventItem = () => {
       
       <View style = {{justifyContent: "space-between", gap: 70, alignItems: "flex-end"}}>
         <Image
-          source = {require("../assets/icons/menu-icon.png")}
+          source = {require("../../assets/icons/menu-icon.png")}
           style = {{width: 20, height: 20}}
         />
         <View style = {{flexDirection: "row", gap: 5, alignItems: "center"}}>

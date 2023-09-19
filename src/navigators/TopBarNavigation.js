@@ -12,10 +12,9 @@ const TopBarNavigator = () => {
         tabBarActiveTintColor: '#000',
         tabBarLabelStyle: { fontSize: 16, fontWeight: "bold", textTransform: "capitalize" },
         tabBarStyle: { backgroundColor: 'white' },
-      }}
-      tabBarOptions = {{
         indicatorStyle: {backgroundColor: "rgba(124, 20, 155, 1)",}
       }}
+      
     >
       <Tab.Screen
         name="Friends"
