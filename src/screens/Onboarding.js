@@ -4,6 +4,8 @@ import CustomBouton from "../components/onboarding/Bouton";
 import Constants from "expo-constants";
 import colors from "../layouts/colors";
 import TextOpen from "../components/TextOpen";
+import openSans from "../layouts/fonts";
+import Input from "../components/onboarding/Input";
 
 const Onboarding = () => {
   const handleLoginWithGoogle = () => {
@@ -19,8 +21,16 @@ const Onboarding = () => {
       <TextOpen style={styles.welcome}>Welcome on board!</TextOpen>
 
       <View style={styles.content}>
-        <TextOpen style={styles.signText}>Create an account</TextOpen>
-
+        <TextOpen style={styles.signText} font={openSans.medium}>
+          Create an account
+        </TextOpen>
+        <View>
+          <Input
+            placeholder={"Email"}
+            keyboardType={"email-address"}
+            label={"Email"}
+          />
+        </View>
         <CustomBouton
           label={"Continue with Google"}
           provider={"google"}
@@ -57,7 +67,7 @@ const styles = StyleSheet.create({
   },
   signText: {
     fontSize: 20,
-    fontWeight: "700",
-    color: "#33313E",
+
+    color: colors.secondary,
   },
 });
