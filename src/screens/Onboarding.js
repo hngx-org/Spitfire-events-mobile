@@ -7,7 +7,7 @@ import font from "../layouts/fonts";
 import TextOpen from "../components/TextOpen";
 import { StatusBar } from "expo-status-bar";
 
-const Onboarding = () => {
+const Onboarding = ({navigation}) => {
   const handleLoginWithGoogle = () => {
     // Authentification Google
     console.log("google");
