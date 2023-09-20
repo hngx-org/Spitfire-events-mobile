@@ -13,12 +13,12 @@ import Constants from "expo-constants";
 import colors from "../layouts/colors";
 import font from "../layouts/fonts";
 import TextOpen from "../components/TextOpen";
-<<<<<<<<< Temporary merge branch 1
+
 import openSans from "../layouts/fonts";
 import Input from "../components/onboarding/Input";
-=========
+
 import { StatusBar } from "expo-status-bar";
->>>>>>>>> Temporary merge branch 2
+
 
 const Onboarding = () => {
   const handleLoginWithGoogle = () => {
@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
   },
   signText: {
     fontSize: 20,
-<<<<<<<<< Temporary merge branch 1
+
 
     color: colors.secondary,
-=========
+
     
     ...Platform.select({
       ios: {
@@ -112,6 +112,6 @@ const styles = StyleSheet.create({
 
     fontWeight: "900",
     color: "#33313E",
->>>>>>>>> Temporary merge branch 2
+
   },
 });
