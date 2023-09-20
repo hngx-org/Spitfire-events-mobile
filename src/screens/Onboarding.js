@@ -16,7 +16,7 @@ import TextOpen from "../components/TextOpen";
 
 import logo from "../../assets/icons/logo.png";
 
-const Onboarding = () => {
+const Onboarding = ({navigation}) => {
   const handleLoginWithGoogle = () => {
     // Authentification Google
     console.log("google");
@@ -31,7 +31,9 @@ const Onboarding = () => {
       <View style={styles.content}>
         <View style={styles.text}>
           <TextOpen style={styles.welcome}>Welcome on board! </TextOpen>
-          <TextOpen style={styles.signText}>Create an account</TextOpen>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <TextOpen style={styles.signText}>Create an account</TextOpen>
+          </TouchableOpacity>
         </View>
         <View style={styles.action}>
           <CustomBouton
@@ -41,7 +43,7 @@ const Onboarding = () => {
           />
           <View style={styles.bottom}>
             <TextOpen style={styles.login}>Have an account ? </TextOpen>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
               <TextOpen style={styles.log}>Login</TextOpen>
             </TouchableOpacity>
           </View>
