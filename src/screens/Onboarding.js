@@ -1,9 +1,11 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, Platform, Image } from "react-native";
 import React from "react";
 import CustomBouton from "../components/onboarding/Bouton";
 import Constants from "expo-constants";
 import colors from "../layouts/colors";
+import font from "../layouts/fonts";
 import TextOpen from "../components/TextOpen";
+import { StatusBar } from "expo-status-bar";
 
 const Onboarding = () => {
   const handleLoginWithGoogle = () => {
@@ -16,6 +18,8 @@ const Onboarding = () => {
   };
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar styles= 'auto' />
+      {/* <Image source={require('./splash.png')} styles={{width: 50,}} /> */}
       <TextOpen style={styles.welcome}>Welcome on board!</TextOpen>
 
       <View style={styles.content}>
@@ -47,7 +51,21 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: "900",
+    
+    ...Platform.select({
+      ios: {
+        margin: 24,
+      },
+      android: {
+        marginHorizontal: 0,
+      },
+      default: {
+        // other platforms, web for example
+        marginHorizontal: 0,
+      },
+    }),
+
     color: colors.primary,
   },
   content: {
@@ -57,7 +75,22 @@ const styles = StyleSheet.create({
   },
   signText: {
     fontSize: 20,
-    fontWeight: "700",
+    
+    ...Platform.select({
+      ios: {
+        marginHorizontal: 24,
+        fontWeight: "bold",
+      },
+      android: {
+        marginHorizontal: 0,
+      },
+      default: {
+        // other platforms, web for example
+        marginHorizontal: 0,
+      },
+    }),
+
+    fontWeight: "900",
     color: "#33313E",
   },
 });
