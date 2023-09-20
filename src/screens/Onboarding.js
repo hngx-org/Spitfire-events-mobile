@@ -15,11 +15,45 @@ import font from "../layouts/fonts";
 import TextOpen from "../components/TextOpen";
 
 import logo from "../../assets/icons/logo.png";
-
+import * as Expo from "expo";
 const Onboarding = () => {
+  const signInWithGoogleAsync = async () => {
+    try {
+      const result = await Expo.Google.logInAsync({
+        androidClientId:
+          "182143099738-lkujdpt6rl0ooed49fprsu3f1rdnirm3.apps.googleusercontent.com",
+        // add iosClientId if needed
+        scopes: ["profile", "email"],
+      });
+
+      if (result.type === "success") {
+        console.log("succesful google signin");
+        var idToken = result.idToken;
+        var email = result.user.email;
+        var name = result.user.name;
+        var id = result.user.id;
+        var img_url = result.user.photoUrl;
+
+        this.sendData(idToken, email, name, img_url);
+
+        console.log(result);
+        return result.accessToken;
+      } else {
+        console.log("cancelled");
+        alert("Sign In cancelled");
+        return { cancelled: true };
+      }
+    } catch (e) {
+      console.log("Exception" + e);
+      alert("Something went wrong... try again");
+      return { error: true };
+    }
+  };
+
   const handleLoginWithGoogle = () => {
     // Authentification Google
     console.log("google");
+    signInWithGoogleAsync();
   };
   const handleLoginWithTwitter = () => {
     console.log("twitter");
