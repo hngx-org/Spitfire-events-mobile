@@ -27,18 +27,27 @@ const Comment = () => {
             <View style={styles.eventDetailsTop}>
               <View style={styles.eventDetailsHeading}>
                 <View>
-                  {/* <Image /> */}
+                  <Image
+                      source = {require("../../assets/icons/plus-icon.png")}
+                      style = {{width: 30, height: 30}}
+                    />
                   <Text style={styles.eventDetailsHeadingText}>Footbal game</Text>
                 </View>
                 <Text style={styles.dater}>May 20</Text>
               </View>
               <View style={styles.timeAndLocation}>
                 <View>
-                  {/* <Image /> */}
+                  <Image
+                      source = {require("../../assets/icons/plus-icon.png")}
+                      style = {{width: 30, height: 30}}
+                    />
                   <Text>Footbal game</Text>
                 </View>
                 <View>
-                  {/* <Image /> */}
+                  <Image
+                      source = {require("../../assets/icons/plus-icon.png")}
+                      style = {{width: 30, height: 30}}
+                    />
                   <Text>Footbal game</Text>
                 </View>
               </View>
@@ -62,26 +71,35 @@ const Comment = () => {
           </View>
           {/* Comments */}
           <ScrollView style={styles.commentsWrapper}>
-            {commentsArr.map((item, index) => {
-              return (
-                <View key={index}>
-                  {/* <Image /> */}
-                  <View>
-                    <Text>Johnexx</Text>
-                    <Text>I will be there no matter what</Text>
-                    <View>
-                      {commentsArr.map((item) => {
-                        return (
-                          <>
-                            {/* <Image /> */}
-                          </>
-                        )
-                      })}
+            <View style={styles.commentsWrapper}>
+              {commentsArr.map((item, index) => {
+                return (
+                  <View key={index} style={styles.singleCommentWrapper}>
+                    <Image
+                      source = {require("../../assets/icons/plus-icon.png")}
+                      style = {{width: 30, height: 30}}
+                    />
+                    <View style={styles.commentBox}>
+                      <Text style={styles.userName}>Johnexx</Text>
+                      <Text>I will be there no matter what</Text>
+                      <View style={styles.imageWrapper}>
+                        {commentsArr.map((item, index) => {
+                          const width = `${100 / commentsArr.length}%`
+                          return (
+                            <View key={index}>
+                              <Image
+                                source = {require("../../assets/icons/plus-icon.png")}
+                                style = {{width: width, height: "100%"}}
+                              />
+                            </View>
+                          )
+                        })}
+                      </View>
                     </View>
                   </View>
-                </View>
-              )
-            })}
+                )
+              })}
+            </View>
           </ScrollView>
         {/* Input */}
         <View style={styles.inputWrapper}></View>
