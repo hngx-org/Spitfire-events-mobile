@@ -61,10 +61,25 @@ const Comment = () => {
             </View>
           </View>
           {/* Comments */}
-          <ScrollView>
+          <ScrollView style={styles.commentsWrapper}>
             {commentsArr.map((item, index) => {
               return (
-                <View key={index}><Text>Hello</Text></View>
+                <View key={index}>
+                  {/* <Image /> */}
+                  <View>
+                    <Text>Johnexx</Text>
+                    <Text>I will be there no matter what</Text>
+                    <View>
+                      {commentsArr.map((item) => {
+                        return (
+                          <>
+                            {/* <Image /> */}
+                          </>
+                        )
+                      })}
+                    </View>
+                  </View>
+                </View>
               )
             })}
           </ScrollView>
@@ -91,6 +106,22 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
     padding: 15,
     justifyContent: "space-between"
+  },
+  commentsWrapper: {
+    borderRadius: 16,
+    width: "85%",
+    maxWidth: "85%",
+    minHeight: 250,
+    backgroundColor: "green",
+    gap: 20,
+  },
+  commentBlock: {
+    borderRadius: 16,
+    width: "85%",
+    maxWidth: "85%",
+    minHeight: 250,
+    backgroundColor: "green",
+    gap: 20,
   },
   inputWrapper: {
     position: "absolute",
