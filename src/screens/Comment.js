@@ -4,30 +4,32 @@ import colors from '../layouts/colors'
 
 
 const Comment = () => {
-  const commentsArr = []
+  const commentsArr = ["a", "a", "a", "a",]
   return (
     <TouchableWithoutFeedback>
-      {/* Event Details */}
       <View>
+        {/* Event Details */}
         <View>
-          <View></View>
-          <View></View>
+          <View>
+            <View></View>
+            <View></View>
+          </View>
+          <View>
+            <View></View>
+            <View></View>
+          </View>
         </View>
-        <View>
-          <View></View>
-          <View></View>
-        </View>
-      </View>
-      {/* Comments */}
-      <ScrollView>
-        {commentsArr.map((item, index) => {
-          return (
-            <View key={index}></View>
-          )
-        })}
-      </ScrollView>
+        {/* Comments */}
+        <ScrollView>
+          {commentsArr.map((item, index) => {
+            return (
+              <View key={index}><Text>Hello</Text></View>
+            )
+          })}
+        </ScrollView>
       {/* Input */}
       <View style={styles.inputWrapper}></View>
+      </View>
     </TouchableWithoutFeedback>
   )
 }
