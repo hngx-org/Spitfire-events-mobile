@@ -12,7 +12,7 @@ const TopBarNavigator = () => {
         tabBarActiveTintColor: '#000',
         tabBarLabelStyle: { fontSize: 16, fontWeight: "bold", textTransform: "capitalize" },
         tabBarStyle: { backgroundColor: 'white' },
-        indicatorStyle: {backgroundColor: "rgba(124, 20, 155, 1)",}
+        tabBarIndicatorStyle: {backgroundColor: "rgba(124, 20, 155, 1)",}
       }}
       
     >
