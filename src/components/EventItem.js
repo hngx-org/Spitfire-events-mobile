@@ -1,4 +1,6 @@
 import { View, Text, Image, StyleSheet } from "react-native"
+import colors from "../layouts/colors"
+import openSans from "../layouts/fonts"
 
 const EventItem = () => {
   return (
