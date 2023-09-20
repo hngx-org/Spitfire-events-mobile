@@ -41,13 +41,27 @@ const CalendarScreen = () => {
     setEvents(eventData);
   }, []);
 
+  const calendarTheme = {
+    calendarBackground: "#F0E8F2", // Background color of the calendar
+    dayTextColor: "#87748C", // Text color of regular day numbers
+    monthTextColor: "black", // Text color of month name
+    arrowColor: "purple", // Color of arrows to navigate to next/previous month
+    selectedDayBackgroundColor: "yellow", // Background color of selected day
+    selectedDayTextColor: "#FFA500", // Text color of selected day
+    todayTextColor: "#FFA500", // Text color of today's date
+    dayNumColor: "#87748C", // Text color of regular day numbers
+    textDayFontFamily: "System", // Font family for day text
+    textMonthFontFamily: "System", // Font family for month text
+    textDayHeaderFontFamily: "System", // Font family for day header text
+  };
+
   return (
     <View
       style={{
         flex: 1,
         paddingTop: 30,
         paddingHorizontal: 24,
-        backgroundColor: "#FAFAFC",
+        backgroundColor: "#FFFCFD",
       }}
     >
       <CalendarHeader />
@@ -64,10 +78,7 @@ const CalendarScreen = () => {
           onDayPress={(day) => {
             setSelectedDate(day.dateString);
           }}
-          style={{
-            borderColor: "gray",
-            borderRadius: 20,
-          }}
+          theme={calendarTheme} // Apply the custom theme
         />
       </View>
 
