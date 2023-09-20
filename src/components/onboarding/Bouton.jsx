@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import twitter from "../../../assets/icons/tweet.png";
 import google from "../../../assets/icons/google.png";
+import TextOpen from "../TextOpen";
 
 export default function CustomBouton({ label, provider, ...props }) {
   return (
@@ -10,7 +11,7 @@ export default function CustomBouton({ label, provider, ...props }) {
       ) : (
         <Image source={google} style={styles.img} />
       )}
-      <Text style={styles.texteBouton}>{label}</Text>
+      <TextOpen style={styles.texteBouton}>{label}</TextOpen>
     </TouchableOpacity>
   );
 }
@@ -18,7 +19,7 @@ export default function CustomBouton({ label, provider, ...props }) {
 const styles = StyleSheet.create({
   bouton: {
     display: "flex",
-    paddingVertical: 10,
+    paddingVertical: 16,
     paddingHorizontal: 12,
     justifyContent: "center",
     alignItems: "center",
@@ -28,5 +29,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     gap: 15,
     borderRadius: 5,
+  },
+  texteBouton: {
+    fontSize: 18,
   },
 });
