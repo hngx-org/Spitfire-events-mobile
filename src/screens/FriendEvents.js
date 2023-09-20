@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native"
-
+import { View, Text, StyleSheet, Image, ScrollView, Pressable } from "react-native"
 import EventItem from "../components/EventItem"
+import { useNavigation } from "@react-navigation/native"
 
 const FriendEvents = () => {
+  const navigation = useNavigation()
+  
   return(
     <View style = {{paddingHorizontal: 20, paddingTop: 10, backgroundColor: "#fff", flex: 1}}>
     
@@ -11,12 +13,15 @@ const FriendEvents = () => {
       
     </ScrollView>
     
-      <View style = {styles.fab}>
+      <Pressable 
+        style = {styles.fab}
+        onPress = {() => navigation.navigate("Create")}
+      >
         <Image
           source = {require("../../assets/icons/plus-icon.png")}
-          style = {{width: 30, height: 30}}
+          style = {{width: 20, height: 20}}
         />
-      </View>
+      </Pressable>
     </View>
   )
 }
@@ -29,7 +34,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     right: 20,
     backgroundColor: "rgba(234, 186, 0, 1)",
-    padding: 10,
+    padding: 15,
     borderRadius: 50,
   }
 })

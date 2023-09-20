@@ -1,7 +1,6 @@
 import {
   SafeAreaView,
   StyleSheet,
-  Text,
   View,
   Image,
   Platform,
@@ -11,71 +10,76 @@ import React from "react";
 import CustomBouton from "../components/onboarding/Bouton";
 import Constants from "expo-constants";
 import colors from "../layouts/colors";
-import font from "../layouts/fonts";
 import TextOpen from "../components/TextOpen";
 
 import logo from "../../assets/icons/logo.png";
-import * as Expo from "expo";
-const Onboarding = () => {
-  const signInWithGoogleAsync = async () => {
-    try {
-      const result = await Expo.Google.logInAsync({
-        androidClientId:
-          "182143099738-lkujdpt6rl0ooed49fprsu3f1rdnirm3.apps.googleusercontent.com",
-        // add iosClientId if needed
-        scopes: ["profile", "email"],
-      });
+import * as webBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-      if (result.type === "success") {
-        console.log("succesful google signin");
-        var idToken = result.idToken;
-        var email = result.user.email;
-        var name = result.user.name;
-        var id = result.user.id;
-        var img_url = result.user.photoUrl;
+webBrowser.maybeCompleteAuthSession();
 
-        this.sendData(idToken, email, name, img_url);
+// IOS : 176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com
+// Android : 176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com
 
-        console.log(result);
-        return result.accessToken;
-      } else {
-        console.log("cancelled");
-        alert("Sign In cancelled");
-        return { cancelled: true };
+const Onboarding = ({ navigation }) => {
+  const [userInfo, setUserInfo] = React.useState(null);
+  const handleLoginWithGoogle = () => {};
+
+  // handling google auth
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId:
+      "176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com",
+    iosClientId:
+      "176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com",
+  });
+
+  React.useEffect(() => {
+    handleSignWithGoogl();
+  }, [response]);
+
+  // Test if user is already connected
+  async function handleSignWithGoogl() {
+    const user = await AsyncStorage.getItem("@user");
+    if (!user) {
+      if (response?.type === "success") {
+        await getUserInfo(response.authentication.accessToken);
       }
-    } catch (e) {
-      console.log("Exception" + e);
-      alert("Something went wrong... try again");
-      return { error: true };
+    } else {
+      setUserInfo(JSON.parse(user));
     }
-  };
+  }
 
-  const handleLoginWithGoogle = () => {
-    // Authentification Google
-    console.log("google");
-    signInWithGoogleAsync();
-  };
-  const handleLoginWithTwitter = () => {
-    console.log("twitter");
-    // Twitter Authentification
+  // get user info from google
+  const getUserInfo = async (token) => {
+    const response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const user = await response.json();
+    await AsyncStorage.setItem("@user", JSON.stringify(user));
+    setUserInfo(user);
   };
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.img} />
       <View style={styles.content}>
         <View style={styles.text}>
-          <TextOpen style={styles.welcome}>Welcome on board! </TextOpen>
-          <TextOpen style={styles.signText}>Create an account</TextOpen>
+          <TextOpen style={styles.welcome}>
+            {JSON.stringify(userInfo)}{" "}
+          </TextOpen>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <TextOpen style={styles.signText}>Create an account</TextOpen>
+          </TouchableOpacity>
         </View>
         <View style={styles.action}>
           <CustomBouton
             label={"Continue with Google"}
             provider={"google"}
-            onPress={handleLoginWithGoogle}
+            onPress={() => promptAsync()}
           />
           <View style={styles.bottom}>
             <TextOpen style={styles.login}>Have an account ? </TextOpen>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => promptAsync()}>
               <TextOpen style={styles.log}>Login</TextOpen>
             </TouchableOpacity>
           </View>
