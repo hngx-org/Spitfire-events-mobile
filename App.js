@@ -9,7 +9,7 @@ import Onboarding from "./src/screens/Onboarding";
 const App = () => {
   return (
     <NavigationContainer>
-      {/*<TabNavigator />*/}
+      {/* <TabNavigator />*/}
       {/*<Home />*/}
       <Onboarding />
     </NavigationContainer>
