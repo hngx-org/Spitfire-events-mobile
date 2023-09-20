@@ -1,18 +1,19 @@
 import {
-  Image,
   SafeAreaView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
+  Image,
+  Platform,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import CustomBouton from "../components/onboarding/Bouton";
 import Constants from "expo-constants";
 import colors from "../layouts/colors";
+import font from "../layouts/fonts";
 import TextOpen from "../components/TextOpen";
-import openSans from "../layouts/fonts";
-import Input from "../components/onboarding/Input";
+
 import logo from "../../assets/icons/logo.png";
 
 const Onboarding = () => {
@@ -60,7 +61,20 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: "900",
+    ...Platform.select({
+      ios: {
+        margin: 24,
+      },
+      android: {
+        marginHorizontal: 0,
+      },
+      default: {
+        // other platforms, web for example
+        marginHorizontal: 0,
+      },
+    }),
+
     color: colors.primary,
   },
   content: {
