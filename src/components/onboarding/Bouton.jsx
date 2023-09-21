@@ -1,11 +1,17 @@
-import { Image, StyleSheet, Text, TouchableOpacity, Platform } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import twitter from "../../../assets/icons/tweet.png";
 import google from "../../../assets/icons/google.png";
 import TextOpen from "../TextOpen";
 
-export default function CustomBouton({ label, provider, ...props }) {
+export default function CustomBouton({ label, provider, style, ...props }) {
   return (
-    <TouchableOpacity style={styles.bouton} {...props}>
+    <TouchableOpacity style={{ ...styles.bouton, style }} {...props}>
       {provider === "twitter" ? (
         <Image source={twitter} style={styles.img} />
       ) : (
@@ -25,10 +31,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     borderColor: "#571FCD",
-    borderWidth: 1,    
+    borderWidth: 1,
     backgroundColor: "#fff",
     gap: 15,
-    borderRadius: 5,
+    borderRadius: 10,
     ...Platform.select({
       ios: {
         marginHorizontal: 25,
@@ -44,5 +50,6 @@ const styles = StyleSheet.create({
   },
   texteBouton: {
     fontSize: 18,
+    color: "#7C149B",
   },
 });
