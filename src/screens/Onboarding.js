@@ -52,6 +52,7 @@ const Onboarding = ({ navigation }) => {
     } else {
       setUserInfo(JSON.parse(user));
       navigation.navigate("Home");
+      // Sending user to the home page
     }
   }
 
