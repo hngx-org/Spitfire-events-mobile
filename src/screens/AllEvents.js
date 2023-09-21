@@ -19,7 +19,7 @@ const AllEvents = () => {
       >
         <Image
           source = {require("../../assets/icons/plus-icon.png")}
-          style = {{width: 20, height: 20}}
+          style = {{width: 25, height: 25}}
         />
       </Pressable>
     </View>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 20,
     right: 20,
-    backgroundColor: "rgba(234, 186, 0, 1)",
+    backgroundColor: "#f49400",
     padding: 15,
     borderRadius: 50,
   }
