@@ -99,6 +99,6 @@ const styles = StyleSheet.create({
   location: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#f49400"
+    color: "#f49400",
   },
 });
