@@ -4,11 +4,12 @@ import TextOpen from "./TextOpen"
 
 const AppButton = ({
   onPress,
-  title
+  title,
+  style
 }) => {
   return (
     <Pressable
-      style = {styles.btn}
+      style = {{...styles.btn, ...style}}
       onPress = {onPress}
     >
       <TextOpen
