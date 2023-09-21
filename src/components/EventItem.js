@@ -2,10 +2,10 @@ import {View, Text, Image, StyleSheet} from "react-native";
 import colors from "../layouts/colors"
 import openSans from "../layouts/fonts"
 import TextOpen from "./TextOpen"
-import colors from "../layouts/colors";
-import openSans from "../layouts/fonts";
 
-const EventItem = () => {
+const EventItem = ({ title, date, start_time, end_time, location }) => {
+  const daysRemaining = Math.ceil(new Date(new Date(date).getTime() - new Date().getTime()).getTime() / 1000 / 3600 / 24)
+  
   return (
     <View style={styles.box}>
       <View style={{marginRight: 10}}>
@@ -18,24 +18,19 @@ const EventItem = () => {
         <TextOpen 
           style = {styles.title}
           font = {"OpenSans_700Bold"}
-        >Football Game</TextOpen>
+        >{title}</TextOpen>
         <TextOpen 
           style = {styles.date}
           font = {"OpenSans_600SemiBold"}
-        >May 20, 2023</TextOpen>
+        >{new Date(date).toDateString()}</TextOpen>
         <TextOpen 
           style = {styles.time}
           font = {"OpenSans_600SemiBold"}
-        >Friday 4-6pm</TextOpen>
+        >{`${start_time} - ${end_time}`}</TextOpen>
         <TextOpen 
           style = {styles.location}
           font = {"OpenSans_700Bold"}
-        >Teslim Balogun Stadium</TextOpen>
-      <View style={{gap: 2, flex: 1}}>
-        <Text style={styles.title}>Football Game</Text>
-        <Text style={styles.date}>May 20, 2023</Text>
-        <Text style={styles.time}>Friday 4-6pm</Text>
-        <Text style={styles.location}>Teslim Balogun Stadium</Text>
+        >{location}</TextOpen>
       </View>
 
       <View
@@ -50,21 +45,21 @@ const EventItem = () => {
           style={{width: 20, height: 20}}
         />
         <View style={{flexDirection: "row", gap: 5, alignItems: "center"}}>
-          <View
+          {daysRemaining == 0 && <View
             style={{
               padding: 3,
               backgroundColor: "rgba(0, 200, 0, 1)",
               borderRadius: 3,
             }}
-          ></View>
+          ></View>}
           <Text
             style={{
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: "bold",
               color: "rgba(124, 20, 155, 1)",
             }}
           >
-            LIVE
+            {daysRemaining > 0 ? `${daysRemaining} days left` : (daysRemaining == 0 ? "Live" : "Event Finished") }
           </Text>
         </View>
       </View>
