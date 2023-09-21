@@ -18,6 +18,7 @@ const CalendarHeader = () => {
           color: "#710193",
           fontSize: 20,
         }}
+        font={"OpenSans_600SemiBold"}
       >
         Calendar
       </TextOpen>

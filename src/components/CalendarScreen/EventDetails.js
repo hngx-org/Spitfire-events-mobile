@@ -12,7 +12,7 @@ const EventDetails = ({item}) => {
         alignItems: "center",
         paddingLeft: 20,
         paddingTop: 15,
-        paddingBottom: 15
+        paddingBottom: 15,
       }}
     >
       <View
@@ -37,6 +37,7 @@ const EventDetails = ({item}) => {
             fontSize: 15,
             color: "#710193",
           }}
+          font={"OpenSans_600SemiBold"}
         >
           {item.title}
         </TextOpen>
@@ -48,7 +49,7 @@ const EventDetails = ({item}) => {
           <Image
             style={{
               marginRight: 10,
-              marginBottom: 5
+              marginBottom: 5,
             }}
             source={require("../../../assets/icons/event-location.png")}
           />
