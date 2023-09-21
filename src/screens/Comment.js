@@ -28,7 +28,7 @@ const Comment = () => {
               <View style={styles.eventDetailsHeading}>
                 <View>
                   <Image
-                      source = {require("../../assets/icons/plus-icon.png")}
+                      source = {"https://picsum.photos/seed/696/3000/2000"}
                       style = {{width: 30, height: 30}}
                     />
                   <Text style={styles.eventDetailsHeadingText}>Footbal game</Text>
@@ -38,14 +38,14 @@ const Comment = () => {
               <View style={styles.timeAndLocation}>
                 <View>
                   <Image
-                      source = {require("../../assets/icons/plus-icon.png")}
+                      source = {"https://picsum.photos/seed/696/3000/2000"}
                       style = {{width: 30, height: 30}}
                     />
                   <Text>Footbal game</Text>
                 </View>
                 <View>
                   <Image
-                      source = {require("../../assets/icons/plus-icon.png")}
+                      source = {"https://picsum.photos/seed/696/3000/2000"}
                       style = {{width: 30, height: 30}}
                     />
                   <Text>Footbal game</Text>
@@ -76,7 +76,7 @@ const Comment = () => {
                 return (
                   <View key={index} style={styles.singleCommentWrapper}>
                     <Image
-                      source = {require("../../assets/icons/plus-icon.png")}
+                      source = {"https://picsum.photos/seed/696/3000/2000"}
                       style = {{width: 30, height: 30}}
                     />
                     <View style={styles.commentBox}>
@@ -88,7 +88,7 @@ const Comment = () => {
                           return (
                             <View key={index}>
                               <Image
-                                source = {require("../../assets/icons/plus-icon.png")}
+                                source = {"https://picsum.photos/seed/696/3000/2000"}
                                 style = {{width: width, height: "100%"}}
                               />
                             </View>
