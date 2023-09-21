@@ -10,7 +10,6 @@ const PeopleStack = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name={"People"} component={People} />
       <Stack.Screen name={"PeopleView"} component={PeopleView} />
-      <Stack.Screen name={"People"} component={Comment} />
     </Stack.Navigator>
   );
 };
