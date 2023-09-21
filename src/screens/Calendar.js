@@ -65,7 +65,7 @@ const CalendarScreen = () => {
       }}
     >
       <CalendarHeader />
-
+<ScrollView>
       <View
         style={{
           marginTop: 20,
@@ -74,6 +74,7 @@ const CalendarScreen = () => {
         }}
       >
         <Calendar
+        style={{borderRadius: 15,}}
           markedDates={markedDates}
           onDayPress={(day) => {
             setSelectedDate(day.dateString);
@@ -92,6 +93,7 @@ const CalendarScreen = () => {
           />
         </View>
       )}
+      </ScrollView>
     </View>
   );
 };
