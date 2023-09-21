@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     
   },
   header: {
-    fontWeight: "bold",
     color: "rgba(124, 20, 155, 1)",
     fontSize: 30,
     paddingHorizontal: 20
