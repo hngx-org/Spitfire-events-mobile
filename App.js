@@ -17,15 +17,18 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <TabNavigator />
-    {/*<Home />*/}
-       {/*<Onboarding /> */}
-        {/* <Comments /> */}
-      
-      {/* <AuthNavigator/> */}
-{/* {userInfo.token ? <TabNavigator /> : <AuthNavigator />} */}
-      {/*</Stack.Navigator> */}
+      {/* <TabNavigator /> */}
+      {/*<Home />*/}
+      {/*<Onboarding /> */}
+      {/* <Comments /> */}
 
+      <AuthNavigator />
+      {/* {userInfo.authentication.accessToken ? (
+        <TabNavigator />
+      ) : (
+        <AuthNavigator />
+      )} */}
+      {/*</Stack.Navigator> */}
     </NavigationContainer>
   );
 };
