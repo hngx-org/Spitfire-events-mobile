@@ -10,22 +10,20 @@ import Home from "./src/screens/Home";
 import Onboarding from "./src/screens/Onboarding";
 import Comments from "./src/screens/Comment";
 import AuthNavigator from "./src/navigators/AuthNavigator";
-// import {AuthContext} from "../context/AuthContext";
+import {AuthContext} from "../context/AuthContext";
 
 const App = () => {
-  // const {userInfo} = useContext(AuthContext);
+  const {userInfo} = useContext(AuthContext);
 
   return (
     <NavigationContainer>
-      <TabNavigator />
-    {/* <Home /> */}
+      {/* <TabNavigator /> */}
+      {/* <Home /> */}
       {/* <Onboarding /> */}
-        {/* <Comments /> */}
-      
-      {/* <AuthNavigator/> */}
-{/* {userInfo.token ? <TabNavigator /> : <AuthNavigator />} */}
-      {/*</Stack.Navigator> */}
+      {/* <Comments /> */}
 
+      {/* <AuthNavigator/> */}
+      {userInfo ? <TabNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };

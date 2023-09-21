@@ -111,18 +111,13 @@ export const AuthProvider = ({children}) => {
 
   const isLoggedIn = async () => {
     try {
-      setSplashLoading(true);
-
       let userInfo = await AsyncStorage.getItem('userInfo');
       userInfo = JSON.parse(userInfo);
 
       if (userInfo) {
         setUserInfo(userInfo);
       }
-
-      setSplashLoading(false);
     } catch (e) {
-      setSplashLoading(false);
       alert(`is logged in error ${e}`);
     }
   };

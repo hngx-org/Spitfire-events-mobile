@@ -44,7 +44,8 @@ const Onboarding = ({ navigation }) => {
 
   // Test if user is already connected
   async function handleSignWithGoogl() {
-    const user = await AsyncStorage.getItem("@user");
+    const user = await AsyncStorage.getItem("userInfo");
+    console.log(user)
     if (!user) {
       if (response?.type === "success") {
         await getUserInfo(response.authentication.accessToken);
@@ -60,7 +61,7 @@ const Onboarding = ({ navigation }) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const user = await response.json();
-    await AsyncStorage.setItem("@user", JSON.stringify(user));
+    await AsyncStorage.setItem("userInfo", JSON.stringify(user));
     setUserInfo(user);
   };
   return (
