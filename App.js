@@ -16,13 +16,13 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <TabNavigator />
-      {/*<Home />*/}
+      {/* <TabNavigator /> */}
+      <Home />
       {/* <AuthNavigator/> */}
 
-      {/* <Stack.Navigator>
-        {userInfo.token ? <TabNavigator /> : <AuthNavigator />}
-      </Stack.Navigator> */}
+      {/* <Stack.Navigator> */}
+{/* {userInfo.token ? <TabNavigator /> : <AuthNavigator />} */}
+      {/*</Stack.Navigator> */}
     </NavigationContainer>
   );
 };
