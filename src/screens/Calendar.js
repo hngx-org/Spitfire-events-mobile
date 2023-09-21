@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {View, Text, FlatList} from "react-native";
+import {View, Text, FlatList, ScrollView} from "react-native";
 import {Calendar, LocaleConfig} from "react-native-calendars";
 import EventDetails from "../components/CalendarScreen/EventDetails";
 import CalendarHeader from "../components/CalendarScreen/CalendarHeader";
@@ -65,7 +65,7 @@ const CalendarScreen = () => {
       }}
     >
       <CalendarHeader />
-
+<ScrollView>
       <View
         style={{
           marginTop: 20,
@@ -74,6 +74,7 @@ const CalendarScreen = () => {
         }}
       >
         <Calendar
+        style={{borderRadius: 15,}}
           markedDates={markedDates}
           onDayPress={(day) => {
             setSelectedDate(day.dateString);
@@ -88,9 +89,11 @@ const CalendarScreen = () => {
             data={events.filter((event) => event.date === selectedDate)}
             keyExtractor={(item) => item.id.toString()}
             renderItem={EventDetails}
+            
           />
         </View>
       )}
+      </ScrollView>
     </View>
   );
 };

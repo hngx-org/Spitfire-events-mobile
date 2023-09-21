@@ -1,13 +1,13 @@
 const eventData = [
   //This object array carries 12 objects
-    {
-      id: 1,
-      title: "Movie Night",
+  {
+    id: 1,
+    title: "Movie Night",
     location: "Genesis cinemas, Festac",
     start_time: "10:00 AM",
     end_time: "12:00 PM",
     date: "2023-09-20", // Use ISO date format (YYYY-MM-DD)
-  thumbnail:
+    thumbnail:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
@@ -99,7 +99,7 @@ const eventData = [
       date: "2023-10-19",
         thumbnail:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
-    },
+  },
   {
     id: 11,
     title: "Movie Night",

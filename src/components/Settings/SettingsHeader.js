@@ -1,9 +1,9 @@
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {Dimensions, StyleSheet, Text, View} from "react-native";
+import React from "react";
 import {Ionicons} from "@expo/vector-icons";
-import TextOpen from '../TextOpen';
+import TextOpen from "../TextOpen";
 
-const CalendarHeader = () => {
+const SettingsHeader = () => {
   return (
     <View
       style={{
@@ -11,8 +11,6 @@ const CalendarHeader = () => {
         height: 48,
         justifyContent: "space-between",
         alignItems: "center",
-        paddingTop: 15,
-        marginTop: 15,
       }}
     >
       <TextOpen
@@ -22,13 +20,13 @@ const CalendarHeader = () => {
         }}
         font={"OpenSans_600SemiBold"}
       >
-        Calendar
+        Settings
       </TextOpen>
       <Ionicons name="ellipsis-vertical" size={20} color="black" />
     </View>
   );
-}
+};
 
-export default CalendarHeader
+export default SettingsHeader;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
