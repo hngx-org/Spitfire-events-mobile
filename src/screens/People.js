@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet } from "react-native"
+import ImageCard from "../components/People/ImageCard"
 
 const People = () => {
   return(
     <View>
-      <Text>People Screen</Text>
+      <ImageCard/>
     </View>
   )
 }
