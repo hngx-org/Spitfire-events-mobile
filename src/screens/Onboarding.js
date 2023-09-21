@@ -12,6 +12,10 @@ import Constants from "expo-constants";
 import colors from "../layouts/colors";
 import TextOpen from "../components/TextOpen";
 
+
+import openSans from "../layouts/fonts";
+import Input from "../components/onboarding/Input";
+import { StatusBar } from "expo-status-bar";
 import logo from "../../assets/icons/logo.png";
 import * as webBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
@@ -125,28 +129,27 @@ const styles = StyleSheet.create({
   },
   signText: {
     fontSize: 20,
+
+
     color: colors.secondary,
-  },
-  img: {
-    marginVertical: 20,
-  },
-  text: {
-    gap: 20,
-  },
-  action: {
-    gap: 30,
-  },
-  bottom: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 1,
-  },
-  log: {
-    color: colors.secondary,
-    fontWeight: "bold",
-  },
-  login: {
-    textAlign: "center",
-    flexDirection: "row",
+
+    
+    ...Platform.select({
+      ios: {
+        marginHorizontal: 24,
+        fontWeight: "bold",
+      },
+      android: {
+        marginHorizontal: 0,
+      },
+      default: {
+        // other platforms, web for example
+        marginHorizontal: 0,
+      },
+    }),
+
+    fontWeight: "900",
+    color: "#33313E",
+
   },
 });
