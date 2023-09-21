@@ -10,11 +10,12 @@ import {
   StyleSheet,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import {AuthContext} from "../context/AuthContext";
+// import {AuthContext} from "../context/AuthContext";
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  // uncomment this
   // const {isLoading, login} = useContext(AuthContext);
 
   return (
