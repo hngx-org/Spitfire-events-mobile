@@ -1,11 +1,12 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Button, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import colors from '../../layouts/colors'
 
-const ImageCard = () => {
+const ImageCard = ({data}) => {
   return (
     <View style={styles.container}>
-        <Text>YBNL MAFIA</Text>
-        <Image source={require('../../../assets/images/ybnlmafia.png')}/>
+        <Text style={styles.constainerText}>{data.name}</Text>
+        <Image source={data.img}/>
     </View>
   )
 }
@@ -14,7 +15,10 @@ export default ImageCard
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 15,
-        height: '25%'   
+        borderRadius: 10,
+        backgroundColor: colors.light   
+    },
+    constainerText: {
+        padding: 5
     }
 })
