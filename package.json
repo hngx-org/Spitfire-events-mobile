@@ -44,5 +44,6 @@
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
+
   "private": true
 }

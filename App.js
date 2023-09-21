@@ -2,8 +2,8 @@
 
 // Note: The stack navigator I commented out is for the authentication flow
 
-import React, {useContext} from "react";
-import {NavigationContainer} from "@react-navigation/native";
+import React, { useContext } from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./src/navigators/TabNavigator";
 // This below is just for testing, will be removed eventually
 import Home from "./src/screens/Home";
@@ -18,14 +18,13 @@ const App = () => {
   return (
     <NavigationContainer>
       <TabNavigator />
-    {/* <Home /> */}
+      {/* <Home /> */}
       {/* <Onboarding /> */}
-        {/* <Comments /> */}
-      
-      {/* <AuthNavigator/> */}
-{/* {userInfo.token ? <TabNavigator /> : <AuthNavigator />} */}
-      {/*</Stack.Navigator> */}
+      {/* <Comments /> */}
 
+      {/* <AuthNavigator/> */}
+      {/* {userInfo.token ? <TabNavigator /> : <AuthNavigator />} */}
+      {/*</Stack.Navigator> */}
     </NavigationContainer>
   );
 };
