@@ -13,6 +13,7 @@ const EventDetails = ({item}) => {
         paddingLeft: 20,
         paddingTop: 15,
         paddingBottom: 15,
+        marginBottom: 20
       }}
     >
       <View

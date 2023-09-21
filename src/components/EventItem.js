@@ -1,7 +1,7 @@
 import {View, Text, Image, StyleSheet} from "react-native";
 import colors from "../layouts/colors"
 import openSans from "../layouts/fonts"
-import TextOpen from "./TextOpen"
+import TextOpen from "./TextOpen";
 
 const EventItem = () => {
   return (
@@ -99,6 +99,6 @@ const styles = StyleSheet.create({
   location: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#f49400"
+    color: "#f49400",
   },
 });

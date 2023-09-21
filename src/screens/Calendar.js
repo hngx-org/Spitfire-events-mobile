@@ -89,6 +89,7 @@ const CalendarScreen = () => {
             data={events.filter((event) => event.date === selectedDate)}
             keyExtractor={(item) => item.id.toString()}
             renderItem={EventDetails}
+            
           />
         </View>
       )}

@@ -1,18 +1,29 @@
-import { View, Text, StyleSheet, Image, ScrollView, Pressable } from "react-native"
+import { View, Text, StyleSheet, Image, FlatList, Pressable } from "react-native"
+import { useContext } from "react"
 import EventItem from "../components/EventItem"
 import { useNavigation } from "@react-navigation/native"
+import { EventContext } from "../context/EventContext"
 
 const FriendEvents = () => {
   const navigation = useNavigation()
+  const { events } = useContext(EventContext)
   
-  return(
+  return (
     <View style = {{paddingHorizontal: 20, paddingTop: 10, backgroundColor: "#fff", flex: 1}}>
-    
-    <ScrollView>
-      <EventItem />
-      
-    </ScrollView>
-    
+      <FlatList 
+        data = {events.filter(event => event.friend)}
+        renderItem = {({ item }) => {
+          return (
+            <EventItem 
+              title = {item.title}
+              date = {item.date}
+              start_time = {item.start_time}
+              end_time = {item.end_time}
+              location = {item.location}
+            />
+          )
+        }}
+      />
       <Pressable 
         style = {styles.fab}
         onPress = {() => navigation.navigate("Create")}

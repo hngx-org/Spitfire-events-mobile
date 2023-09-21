@@ -1,8 +1,8 @@
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import HomeStack from "./HomeStack";
 import Settings from "../screens/Settings";
-import People from "../screens/People";
 import CalendarScreen from "../screens/Calendar";
+import PeopleStack from "../navigators/PeopleStack";
 import { Ionicons } from '@expo/vector-icons';
 import colors from "../layouts/colors";
 
@@ -34,7 +34,7 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen name="Timeline" component={HomeStack} />
-      <Tab.Screen name="People" component={People} />
+      <Tab.Screen name="People" component={PeopleStack} />
       <Tab.Screen name="Calendar" component={CalendarScreen} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
