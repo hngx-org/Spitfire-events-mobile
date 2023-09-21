@@ -33,8 +33,7 @@ const TabNavigator = () => {
       headerShown: false,
       })}
     >
-      <Tab.Screen 
-      name="Timeline" component={HomeStack} />
+      <Tab.Screen name="Timeline" component={HomeStack} />
       <Tab.Screen name="People" component={People} />
       <Tab.Screen name="Calendar" component={CalendarScreen} />
       <Tab.Screen name="Settings" component={Settings} />

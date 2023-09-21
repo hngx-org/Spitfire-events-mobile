@@ -23,6 +23,10 @@ const colors = {
   orange: '#ff9400',
   paleyellow: '#fff7b5',
   green: '3dff00',
+  screen5n6: {
+    primary: '#4500e4',
+    secondary: '#f5fafa'
+  }
 };
 
 export default colors;

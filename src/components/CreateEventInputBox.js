@@ -16,13 +16,13 @@ const CreateEventInputBox = ({
     <View style = {{
       flexDirection: "row", 
       flex: 1, 
-      backgroundColor: "#f0f0f0",
+      backgroundColor: "rgba(240, 232, 242, 1)",
       borderRadius: 10,
       ...style
     }}
     >
       <AppTextInput
-        onChangeText = {onChangeText}
+        onChangeText = {val => onChangeText(val)}
         style = {{borderTopRightRadius: button ? 0 : 10 , borderBottomRightRadius: button ? 0 : 10}}
         
         {...props}
@@ -35,10 +35,10 @@ const CreateEventInputBox = ({
           source = {iconSrc}
           style = {{width: 20, height: 20}}
         />
-        <TextOpen 
+        {btnText && <TextOpen 
           style = {styles.label}
           font = {"OpenSans_600SemiBold"}
-        >{btnText}</TextOpen>
+        >{btnText}</TextOpen>}
       </Pressable>}
     </View>
     
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     borderWidth: 0.5,
+    borderColor: "rgba(244, 198, 255, 1)",
     
   },
 })

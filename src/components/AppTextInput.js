@@ -9,7 +9,7 @@ const AppTextInput = ({
     <View style = {{flex: 1}}>
       <TextInput
         style = {{
-          borderColor: colors.inputBorder,
+          borderColor: "rgba(244, 198, 255, 1)",
           borderWidth: 0.5,
           paddingVertical: 10,
           paddingHorizontal: 10,

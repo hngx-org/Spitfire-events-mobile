@@ -1,12 +1,14 @@
 const eventData = [
-  //This object array carries 10 objects
+  //This object array carries 12 objects
     {
       id: 1,
       title: "Movie Night",
-      address: "Genesis cinemas, Festac",
-      startTime: "10:00 AM",
-      endTime: "12:00 PM",
-      date: "2023-09-20", // Use ISO date format (YYYY-MM-DD)
+    location: "Genesis cinemas, Festac",
+    start_time: "10:00 AM",
+    end_time: "12:00 PM",
+    date: "2023-09-20", // Use ISO date format (YYYY-MM-DD)
+  thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
       id: 2,
@@ -15,6 +17,8 @@ const eventData = [
       startTime: "2:00 PM",
       endTime: "4:00 PM",
       date: "2023-09-22",
+        thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
       id: 3,
@@ -23,6 +27,8 @@ const eventData = [
       startTime: "9:30 AM",
       endTime: "5:00 PM",
       date: "2023-09-25",
+        thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
       id: 4,
@@ -31,6 +37,8 @@ const eventData = [
       startTime: "11:00 AM",
       endTime: "7:00 PM",
       date: "2023-09-28",
+        thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
       id: 5,
@@ -39,6 +47,8 @@ const eventData = [
       startTime: "4:00 PM",
       endTime: "11:00 PM",
       date: "2023-10-02",
+        thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
       id: 6,
@@ -47,6 +57,8 @@ const eventData = [
       startTime: "12:00 PM",
       endTime: "8:00 PM",
       date: "2023-10-05",
+        thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
       id: 7,
@@ -55,6 +67,8 @@ const eventData = [
       startTime: "8:00 AM",
       endTime: "6:00 PM",
       date: "2023-10-08",
+        thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
       id: 8,
@@ -63,6 +77,8 @@ const eventData = [
       startTime: "9:00 AM",
       endTime: "12:00 PM",
       date: "2023-10-11",
+        thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
       id: 9,
@@ -71,6 +87,8 @@ const eventData = [
       startTime: "10:30 AM",
       endTime: "3:30 PM",
       date: "2023-10-15",
+        thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
     },
     {
       id: 10,
@@ -79,8 +97,29 @@ const eventData = [
       startTime: "6:00 PM",
       endTime: "11:00 PM",
       date: "2023-10-19",
-    }
-  
+        thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
+    },
+  {
+    id: 11,
+    title: "Movie Night",
+    location: "Genesis cinemas, Festac",
+    start_time: "10:00 AM",
+    end_time: "12:00 PM",
+    date: "2023-09-20", // Use ISO date format (YYYY-MM-DD)
+    thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpASgN5IPkWV3ZgTKE_qOjE1K3qjG_osPYew&usqp=CAU",
+  },
+  {
+    id: 12,
+    title: "Event 23",
+    location: "Elm St, Town, Country",
+    start_time: "2:00 PM",
+    end_time: "4:00 PM",
+    date: "2023-09-22",
+    thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeaiId108cToys7rLOWdlOBTnL_jrWG5LQKw&usqp=CAU",
+  },
   // Add more events as needed
 ];
 
