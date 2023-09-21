@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import HomeStack from "./HomeStack";
 import Settings from "../screens/Settings";
 import CalendarScreen from "../screens/Calendar";
-import PeopleStack from "./PeopleStack";
+import PeopleStack from "../navigators/PeopleStack";
 import { Ionicons } from '@expo/vector-icons';
 import colors from "../layouts/colors";
 
