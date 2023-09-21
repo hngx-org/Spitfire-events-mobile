@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/open-sans": "^0.2.3",
+    "@expo/vector-icons": "^13.0.0",
     "@react-native-async-storage/async-storage": "^1.19.3",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/material-top-tabs": "^6.6.3",
@@ -36,5 +37,6 @@
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
+
   "private": true
 }
