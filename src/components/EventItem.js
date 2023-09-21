@@ -64,6 +64,7 @@ const EventItem = ({ title, date, start_time, end_time, location }) => {
         </View>
       </View>
     </View>
+    </View>
   );
 };
 

@@ -30,6 +30,7 @@
     "scheme": "myapp",
     "extra": {
       "eas": {
+        
       }
     }
   }
