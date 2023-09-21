@@ -2,8 +2,6 @@ import {View, Text, Image, StyleSheet} from "react-native";
 import colors from "../layouts/colors"
 import openSans from "../layouts/fonts"
 import TextOpen from "./TextOpen"
-import colors from "../layouts/colors";
-import openSans from "../layouts/fonts";
 
 const EventItem = () => {
   return (
@@ -68,6 +66,7 @@ const EventItem = () => {
           </Text>
         </View>
       </View>
+    </View>
     </View>
   );
 };
