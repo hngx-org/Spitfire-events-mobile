@@ -6,7 +6,7 @@ const Loading = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace("Tabs")
-    }, 1500)
+    }, 4000)
   }, [])
   
   return (
