@@ -11,7 +11,7 @@ const Techies = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TechiesHeader/>
+      <TechiesHeader title='Techies' member='11 members' />
       
         <View style={styles.today}>
         <Text style={styles.todaytext}>Today</Text>

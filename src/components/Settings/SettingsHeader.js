@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet, Text, View} from "react-native";
+import {Dimensions, StyleSheet, Text, View, Platform} from "react-native";
 import React from "react";
 import {Ionicons} from "@expo/vector-icons";
 import TextOpen from "../TextOpen";
@@ -8,9 +8,9 @@ const SettingsHeader = () => {
     <View
       style={{
         flexDirection: "row",
-        height: 48,
         justifyContent: "space-between",
         alignItems: "center",
+        paddingTop: Platform.OS==='ios'? 35 : 0,
       }}
     >
       <TextOpen

@@ -5,9 +5,11 @@ import DateTimePicker from "@react-native-community/datetimepicker"
 import colors from "../layouts/colors"
 import CreateEventInputBox from "../components/CreateEventInputBox"
 import AppTextInput from "../components/AppTextInput"
+import { Ionicons } from '@expo/vector-icons';
 import TextOpen from "../components/TextOpen"
 import AppButton from "../components/AppButton"
 import DropdownPicker from "react-native-dropdown-picker"
+import { useNavigation } from '@react-navigation/native';
 
 const pickerReducer = (state, action) => {
   switch (action.type) {
@@ -47,7 +49,10 @@ const CreateEvent = () => {
   const [selectedGroup, setSelectedGroup] = useState("")
   const [openDropdown, setOpenDropdown] = useState(false)
   const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
+  const [endDate, setEndDate] = useState(null);
+  //This below is essential for passing data between screens, accessing the navigation props. AND ADDING A FUNCTIONAL ELEMENT(AND ICONS) TO THE DEFAULT HEADER, before this useNavigation can be used, the component has to in one way or the other(directly or indirectly) be wrapped in a navigatorContainer
+const navigation = useNavigation();
+
   const groups = [
     {
       value: 1,
@@ -122,11 +127,13 @@ const CreateEvent = () => {
     
     
       <ScrollView>
-        <View style= {{marginBottom: 20}}>
+        <View style= {{marginBottom: 20, justifyContent: 'space-between', flexDirection: 'row',}}>
           <TextOpen 
             style = {styles.header}
             font = {"OpenSans_700Bold"}
           >Create Event</TextOpen>
+          <Ionicons  onPress={()=>
+        navigation.goBack()} name="close" size={29} style={{paddingTop: 8,}} color="black" />
         </View>
         
         <View style = {{marginBottom: 20}}>
