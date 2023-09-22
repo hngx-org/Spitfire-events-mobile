@@ -11,22 +11,14 @@ webBrowser.maybeCompleteAuthSession();
 
 
 
-const handleSendIDToken = async () => {
-  const user = await AsyncStorage.getItem("@user");
-  if (!user) {
-    if (response?.type === "success") {
-      await getUserInfo(response.authentication.id_token);
-    }
-  } else {
-    setUserInfo(JSON.parse(user));
-  }
-}
+
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [instanceOfGauth, setInstanceOfGauth] = useState("");
 
   // handling google auth
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -61,18 +53,16 @@ export const AuthProvider = ({children}) => {
   const login = async() => {
     setIsLoading(true);
 
-    promptAsync()
+
     if(response) {
+      setInstanceOfGauth(response);
       if (response?.type === "success") {
-        const token = response.authentication.id_token
         axios
           .post(`${BASE_URL}/auth`, {
-            token,
+            token: response.authentication.id_token,
           })
           .then(res => {
             let userInfo = res.data;
-            console.log(userInfo);
-            setUserInfo(userInfo);
             AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
             setIsLoading(false);
           })
@@ -81,17 +71,24 @@ export const AuthProvider = ({children}) => {
             setIsLoading(false);
           });
       }
+      setIsLoading(false)
     }
+        
 
     
   };
+
+  const handleSendIDToken = async (callbackly) => {
+    promptAsync()
+    
+  }
 
   const logout = () => {
     setIsLoading(true);
 
     axios
       .post(
-        `${BASE_URL}/logout`,
+        `${BASE_URL}/auth/logout`,
         {},
         {
           headers: {Authorization: `Bearer ${userInfo.token}`},
@@ -123,6 +120,10 @@ export const AuthProvider = ({children}) => {
   };
 
   useEffect(() => {
+    login();
+  }, [response]);
+
+  useEffect(() => {
     isLoggedIn();
   }, []);
 
@@ -134,6 +135,8 @@ export const AuthProvider = ({children}) => {
         register,
         login,
         logout,
+        promptAsync,
+        instanceOfGauth,
       }}>
       {children}
     </AuthContext.Provider>

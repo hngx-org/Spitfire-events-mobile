@@ -27,50 +27,50 @@ webBrowser.maybeCompleteAuthSession();
 // Android : 176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com
 
 const Onboarding = ({ navigation }) => {
-  const [userInfo, setUserInfo] = React.useState(null);
+  const {userInfo, promptAsync, instanceOfGauth} = useContext(AuthContext);
   const handleLoginWithGoogle = () => {};
 
   // handling google auth
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId:
-      "176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com",
-    iosClientId:
-      "176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com",
-  });
+  // const [request, response, promptAsync] = Google.useAuthRequest({
+  //   androidClientId:
+  //     "176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com",
+  //   iosClientId:
+  //     "176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com",
+  // });
 
-  React.useEffect(() => {
-    handleSignWithGoogl();
-  }, [response]);
+  // React.useEffect(() => {
+  //   handleSignWithGoogl();
+  // }, [response]);
 
   // Test if user is already connected
-  async function handleSignWithGoogl() {
-    const user = await AsyncStorage.getItem("userInfo");
-    console.log(user)
-    if (!user) {
-      if (response?.type === "success") {
-        await getUserInfo(response.authentication.accessToken);
-      }
-    } else {
-      setUserInfo(JSON.parse(user));
-    }
-  }
+  // async function handleSignWithGoogl() {
+  //   const user = await AsyncStorage.getItem("userInfo");
+  //   console.log(user)
+  //   if (!user) {
+  //     if (response?.type === "success") {
+  //       await getUserInfo(response.authentication.accessToken);
+  //     }
+  //   } else {
+  //     setUserInfo(JSON.parse(user));
+  //   }
+  // }
 
   // get user info from google
-  const getUserInfo = async (token) => {
-    const response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const user = await response.json();
-    await AsyncStorage.setItem("userInfo", JSON.stringify(user));
-    setUserInfo(user);
-  };
+  // const getUserInfo = async (token) => {
+  //   const response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   });
+  //   const user = await response.json();
+  //   await AsyncStorage.setItem("userInfo", JSON.stringify(user));
+  //   setUserInfo(user);
+  // };
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.img} />
       <View style={styles.content}>
         <View style={styles.text}>
           <TextOpen style={styles.welcome}>
-            {JSON.stringify(userInfo)}{" "}
+            {JSON.stringify(instanceOfGauth)}{"   ------------------   "} {JSON.stringify(userInfo)}
           </TextOpen>
           <TouchableOpacity onPress={() => navigation.navigate("Register")}>
             <TextOpen style={styles.signText}>Create an account</TextOpen>
