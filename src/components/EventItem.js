@@ -29,12 +29,7 @@ const EventItem = () => {
           style = {styles.location}
           font = {"OpenSans_700Bold"}
         >Teslim Balogun Stadium</TextOpen>
-      <View style={{gap: 2, flex: 1}}>
-        <Text style={styles.title}>Football Game</Text>
-        <Text style={styles.date}>May 20, 2023</Text>
-        <Text style={styles.time}>Friday 4-6pm</Text>
-        <Text style={styles.location}>Teslim Balogun Stadium</Text>
-      </View>
+      <View/>
 
       <View
         style={{
@@ -43,10 +38,6 @@ const EventItem = () => {
           alignItems: "flex-end",
         }}
       >
-        <Image
-          source={require("../../assets/icons/menu-icon.png")}
-          style={{width: 20, height: 20}}
-        />
         <View style={{flexDirection: "row", gap: 5, alignItems: "center"}}>
           <View
             style={{

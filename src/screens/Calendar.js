@@ -65,7 +65,6 @@ const CalendarScreen = () => {
       }}
     >
       <CalendarHeader />
-<ScrollView>
       <View
         style={{
           marginTop: 20,
@@ -93,7 +92,6 @@ const CalendarScreen = () => {
           />
         </View>
       )}
-      </ScrollView>
     </View>
   );
 };

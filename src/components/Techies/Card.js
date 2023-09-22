@@ -1,9 +1,20 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import Icon from '@expo/vector-icons/MaterialCommunityIcons'
-import colors from '../../layouts/colors'
+import { StyleSheet, Text, TouchableOpacity, View, Pressable, Platform } from 'react-native';
+import React from 'react';
+import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+import colors from '../../layouts/colors';
+import { useNavigation } from '@react-navigation/native';
 
 const Card = () => {
+
+
+
+  //This below is essential for editing the header and all other setOptions where useLayoutEffect helps display certain items before the screen loads
+  const navigation = useNavigation();
+
+
+
+
+
   return (
     <View style={styles.container}>
         <View style={styles.detailsContainer}>
@@ -28,15 +39,21 @@ const Card = () => {
                 <Text style={styles.buttontext}>I will join</Text>
             </TouchableOpacity>
         </View>
-      
-        <View style={[styles.flexBetween, {padding: 10, borderTopWidth: 0.5, borderColor: colors.screen5n6.primary}]}>
+        <Pressable onPress={()=>
+        navigation.navigate('Comment')
+      }>
+        <View style={[styles.flexBetween, {padding: 10, borderTopWidth: 0.5, borderColor: colors.primary}]}>
+        
             <View style={[styles.flexRow, {alignItems: 'center'}]}>
                 <Icon style={{color: colors.lightGrey}} name='message'/>
+                
                 <Text style={{color: colors.lightGrey}}>leave a comment</Text>
+                
             </View>
 
             <Icon color={colors.lightGrey} name='chevron-right' size={20} />
         </View>
+        </Pressable>
     </View>
   )
 }
@@ -46,17 +63,16 @@ export default Card
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        borderWidth: 0.5,
-        borderColor: colors.screen5n6.primary,
-        borderRadius: 10
+        borderRadius: 10,
+        marginHorizontal: Platform.OS==='ios' ? 25 : 0,
+        backgroundColor: "rgba(240, 232, 242, 1)",
     },
 
     button: {
         padding: 5,
         borderWidth: 1,
         borderRadius: 5,
-        borderColor: colors.screen5n6.primary,
-        backgroundColor: colors.screen5n6.secondary,
+        borderColor: colors.primary,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center'
@@ -90,16 +106,16 @@ const styles = StyleSheet.create({
         padding: 2,
         borderWidth: 0.5,
         borderRadius: 5,
-        borderColor: colors.screen5n6.primary
+        borderColor: colors.primary
     },
 
     buttontext: {
-        color: colors.screen5n6.primary
+        color: colors.primary
     }, 
 
     headingText: {
         fontSize: 15,
         fontWeight: 'bold',
-        color: colors.screen5n6.primary
+        color: colors.primary
     }
 })

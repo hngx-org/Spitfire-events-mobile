@@ -1,8 +1,12 @@
-import { StyleSheet, StatusBar, FlatList, Keyboard, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, StatusBar, FlatList, Keyboard, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Pressable } from 'react-native';
 import colors from '../layouts/colors'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import TextOpen from '../components/TextOpen';
+import CommentHeader from '../components/People/commentHeader';
+import CommentCard from '../components/People/commentCard';
 
 
 
@@ -22,11 +26,18 @@ const Comment = () => {
 
 
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const[display, setDisplay]=useState('block');
+
+  //This below is essential for editing the header and all other setOptions where useLayoutEffect helps display certain items before the screen loads
+  const navigation = useNavigation();
+
 
   const handleIconPress = () => {
     // Handle the action when the icon is pressed (e.g., send message)
   };
-
+  const onDisplay = ()=>{
+    setDisplay('none');
+  };
 
 
   return (
@@ -34,16 +45,24 @@ const Comment = () => {
       <StatusBar style='auto' />
       {/* Event Details */}
       <View style={styles.contactscont}>
-      {/* Comments */}
-      <FlatList
+        <Pressable onPress={onDisplay}>
+        < CommentHeader/>
+      {/* Comments */}      
+      <View style={styles.today}>
+        <Text style={styles.todaytext}>Today</Text>
+        </View>
+        </Pressable>
+      < CommentCard display={display} onPresser={onDisplay}/>
+      <FlatList style={styles.flatlist}
+      onPress={onDisplay} 
         data={comments}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View style={styles.contactItem}>
+          <Pressable style={styles.contactItem} onPress={onDisplay}>
             <Text style={styles.contacttext}>{item.name}</Text>
             <Text style={styles.contactnum}>{item.comment}</Text>
             <Text style={styles.contactnum}>{item.date}</Text>
-          </View>
+          </Pressable>
         )}
       />
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -86,16 +105,18 @@ const Comment = () => {
 
 
 const styles = StyleSheet.create({
+  flatlist: {
+  },
   inputWrapper: {
     position: "absolute",
   },
   contactscontainer: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'white',
   },
   contactscont: {
     height: '98%',
-    paddingTop: 40,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'white',
+    paddingHorizontal: 5,
   },
   header: {
     fontSize: 24,
@@ -103,17 +124,29 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     color: 'black',
   },
+  today: {
+    alignItems: 'center',
+    marginTop: 3,
+},
+
+todaytext: {
+  fontSize: 10,
+  borderRadius: 50,
+  paddingHorizontal: 7,
+  paddingVertical: 3,
+  backgroundColor: '#ffeeda',
+  color: 'orange',
+},
   contactItem: {
-    backgroundColor: 'white',
     margin: 10,
     padding: 12,
     borderWidth: 1,
-    borderColor: colors.purple,
+    borderColor: colors.primary,
     borderRadius: 15,
     boxShadow: 6,
    },
   contacttext: {
-    color: colors.purple,
+    color: colors.primary,
     fontWeight: '900',
     padding: 9,
     borderBottomColor: 'black',
