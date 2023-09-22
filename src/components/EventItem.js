@@ -1,9 +1,11 @@
 import {View, Text, Image, StyleSheet} from "react-native";
-import colors from "../layouts/colors"
-import openSans from "../layouts/fonts"
+import colors from "../layouts/colors";
+import openSans from "../layouts/fonts";
 import TextOpen from "./TextOpen";
 
 const EventItem = () => {
+
+  
   return (
     <View style={styles.box}>
       <View style={{marginRight: 10}}>
@@ -12,6 +14,7 @@ const EventItem = () => {
           style={{width: 50, height: 50}}
         />
       </View>
+
       <View style = {{gap: 5, flex: 1}}>
         <TextOpen 
           style = {styles.title}
@@ -56,8 +59,8 @@ const EventItem = () => {
             LIVE
           </Text>
         </View>
+        </View>
       </View>
-    </View>
     </View>
   );
 };
