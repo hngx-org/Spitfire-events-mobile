@@ -1,12 +1,18 @@
-import { StyleSheet, Text, TouchableOpacity, View, Pressable, Platform } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, Pressable, Platform, Image, TouchableOpacity, } from 'react-native';
+import React, {useState} from 'react';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import colors from '../../layouts/colors';
 import { useNavigation } from '@react-navigation/native';
 
 const Card = () => {
+    const [isClicked, setIsClicked] = useState(false);
 
-
+    const handleButtonClick = () => {
+      setIsClicked(!isClicked);
+    };
+  
+    const buttonColor = isClicked ? colors.primary : 'rgba(240, 232, 242, 1)';
+    const textColor = isClicked ? 'white' : colors.primary;
 
   //This below is essential for editing the header and all other setOptions where useLayoutEffect helps display certain items before the screen loads
   const navigation = useNavigation();
@@ -19,7 +25,10 @@ const Card = () => {
     <View style={styles.container}>
         <View style={styles.detailsContainer}>
             <View style={styles.flexBetween}>
-                <Text style={styles.headingText}>😊 Football game</Text>
+                <Text style={styles.headingText}><Image
+          source={require("../../../assets/images/cartoon.png")}
+          style={{width: 30, height: 30}}
+        /> Football game</Text>
                 <View style={styles.date}>
                     <Text>May 20</Text>
                 </View>
@@ -35,8 +44,8 @@ const Card = () => {
                     <Text style={{color: colors.lightGrey, fontSize: 12}}>Friday 4 - 7 PM</Text>
                 </View>
             </View>
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttontext}>I will join</Text>
+            <TouchableOpacity style={[styles.button, { backgroundColor: buttonColor, }]} onPress={handleButtonClick}>
+                <Text style={[styles.buttontext,{color: textColor}]}>{isClicked ? 'Joined' : 'I Will Join'}</Text>
             </TouchableOpacity>
         </View>
         <Pressable onPress={()=>
@@ -75,8 +84,7 @@ const styles = StyleSheet.create({
         borderColor: colors.primary,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center'
-        
+        justifyContent: 'center',
     }, 
 
     detailsContainer: {
@@ -110,7 +118,7 @@ const styles = StyleSheet.create({
     },
 
     buttontext: {
-        color: colors.primary
+        color: colors.primary,
     }, 
 
     headingText: {

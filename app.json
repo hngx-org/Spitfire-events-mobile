@@ -11,13 +11,12 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.spitfire.events"
     },
+
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -31,7 +30,7 @@
     "scheme": "myapp",
     "extra": {
       "eas": {
-        "projectId": "bb581f5a-22b5-4e14-8c08-d5948e6badf4"
+        
       }
     }
   }
