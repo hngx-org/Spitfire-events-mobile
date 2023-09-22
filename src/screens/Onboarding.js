@@ -20,6 +20,7 @@ import logo from "../../assets/icons/logo.png";
 import * as webBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {AuthContext} from "../context/AuthContext";
 
 webBrowser.maybeCompleteAuthSession();
 
