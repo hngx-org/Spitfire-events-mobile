@@ -12,7 +12,6 @@ import Constants from "expo-constants";
 import colors from "../layouts/colors";
 import TextOpen from "../components/TextOpen";
 
-
 import openSans from "../layouts/fonts";
 import Input from "../components/onboarding/Input";
 import { StatusBar } from "expo-status-bar";
@@ -48,9 +47,12 @@ const Onboarding = ({ navigation }) => {
     if (!user) {
       if (response?.type === "success") {
         await getUserInfo(response.authentication.accessToken);
+        navigation.navigate("Home");
       }
     } else {
       setUserInfo(JSON.parse(user));
+      navigation.navigate("Home");
+      // Sending user to the home page
     }
   }
 
@@ -68,23 +70,26 @@ const Onboarding = ({ navigation }) => {
       <Image source={logo} style={styles.img} />
       <View style={styles.content}>
         <View style={styles.text}>
-          <TextOpen style={styles.welcome}>
-            {JSON.stringify(userInfo)}{" "}
+          <TextOpen style={styles.welcome}>Welcome on board!</TextOpen>
+          <TextOpen style={styles.signText} font={openSans.bold}>
+            Create an account
           </TextOpen>
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <TextOpen style={styles.signText}>Create an account</TextOpen>
-          </TouchableOpacity>
         </View>
         <View style={styles.action}>
           <CustomBouton
-            label={"Continue with Google"}
+            label={"with Google"}
             provider={"google"}
             onPress={() => promptAsync()}
+            style={styles.btn}
           />
           <View style={styles.bottom}>
-            <TextOpen style={styles.login}>Have an account ? </TextOpen>
-            <TouchableOpacity onPress={() => promptAsync()}>
-              <TextOpen style={styles.log}>Login</TextOpen>
+            <TextOpen style={styles.login} font={openSans.bold}>
+              Have an account ?{" "}
+            </TextOpen>
+            <TouchableOpacity onPress={() => alert("We are working on it")}>
+              <TextOpen style={styles.log} font={openSans.bold}>
+                Login
+              </TextOpen>
             </TouchableOpacity>
           </View>
         </View>
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight + 30,
   },
   welcome: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "900",
     ...Platform.select({
       ios: {
@@ -120,7 +125,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   content: {
-    marginHorizontal: 20,
+    marginHorizontal: 24,
     flex: 1,
     justifyContent: "space-between",
     gap: 16,
@@ -129,11 +134,8 @@ const styles = StyleSheet.create({
   },
   signText: {
     fontSize: 20,
-
-
     color: colors.secondary,
 
-    
     ...Platform.select({
       ios: {
         marginHorizontal: 24,
@@ -147,9 +149,27 @@ const styles = StyleSheet.create({
         marginHorizontal: 0,
       },
     }),
-
-    fontWeight: "900",
-    color: "#33313E",
-
+  },
+  bottom: {
+    flexDirection: "row",
+    marginTop: 20,
+    justifyContent: "center",
+    marginTop: 50,
+  },
+  action: {
+    justifyContent: "center",
+  },
+  btn: {
+    marginTop: 20,
+    flex: 1,
+  },
+  text: {
+    gap: 25,
+  },
+  log: {
+    color: colors.secondary,
+  },
+  login: {
+    color: "#87748C",
   },
 });
