@@ -1,12 +1,39 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import SettingsHeader from "../components/Settings/SettingsHeader";
-import {userInfo} from "../services/User";
 import TextOpen from "../components/TextOpen";
 import {Ionicons} from "@expo/vector-icons";
 import {SimpleLineIcons} from "@expo/vector-icons";
 
 const Settings = () => {
+  const [userInfo, setUserInfo] = useState({});
+
+  const getUserInfo = async () => {
+    try {
+      let userInfo = await AsyncStorage.getItem("userInfo");
+      userInfo = JSON.parse(userInfo);
+
+      if (userInfo) {
+        setUserInfo(userInfo);
+      }
+    } catch (e) {
+      alert(`is logged in error ${e}`);
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  const deleteUserInfo = async () => {
+    try {
+      AsyncStorage.removeItem("userInfo");
+      setUserInfo({});
+    } catch (e) {
+      alert(`is log out error ${e}`);
+    }
+  };
+
   return (
     <View
       style={{
@@ -39,7 +66,7 @@ const Settings = () => {
             <Image
               style={{width: 62, height: 62, borderRadius: 40}}
               source={{
-                uri: userInfo.profile,
+                uri: userInfo.photoUrl,
               }}
             />
           </View>
@@ -50,7 +77,7 @@ const Settings = () => {
               fontSize: 15,
             }}
           >
-            {userInfo.name}
+            {userInfo.displayName}
           </TextOpen>
           <TextOpen
             style={{
@@ -213,7 +240,7 @@ const Settings = () => {
           borderColor: "#F4C6FF",
           padding: 16,
           backgroundColor: "#F0E8F2",
-          marginBottom: 30
+          marginBottom: 30,
         }}
       >
         <View
@@ -283,14 +310,20 @@ const Settings = () => {
         </View>
       </View>
       <TouchableOpacity
+      onPress={deleteUserInfo}
         style={{
           flexDirection: "row",
         }}
       >
-        <SimpleLineIcons name="logout" size={24} color="#EA3131" style={{
-          marginLeft: 10,
-          marginRight: 10
-        }} />
+        <SimpleLineIcons
+          name="logout"
+          size={24}
+          color="#EA3131"
+          style={{
+            marginLeft: 10,
+            marginRight: 10,
+          }}
+        />
         <TextOpen
           style={{
             fontSize: 16,
