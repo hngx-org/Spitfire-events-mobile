@@ -4,6 +4,8 @@ import openSans from "../layouts/fonts";
 import TextOpen from "./TextOpen";
 
 const EventItem = () => {
+
+  
   return (
     <View style={styles.box}>
       <View style={{marginRight: 10}}>
@@ -56,6 +58,7 @@ const EventItem = () => {
           >
             LIVE
           </Text>
+        </View>
         </View>
       </View>
     </View>

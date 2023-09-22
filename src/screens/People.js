@@ -13,8 +13,8 @@ const navigation = useNavigation();
 
   const data = [
     {
-      name: "Ybnl mafia",
-      img: require("../../assets/images/ybnlmafia.png"),
+      name: 'YbnlMafia',
+      img: require('../../assets/images/ybnlmafia.png')
     },
 
     {

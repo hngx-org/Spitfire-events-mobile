@@ -4,7 +4,7 @@ import {Ionicons} from "@expo/vector-icons";
 import TextOpen from '../TextOpen';
 import { useNavigation } from '@react-navigation/native';
 
-const CalendarHeader = () => {
+const CalendarHeader = ({title,member}) => {
 
 
   //This below is essential for editing the header and all other setOptions where useLayoutEffect helps display certain items before the screen loads
@@ -33,13 +33,12 @@ const CalendarHeader = () => {
         style={{
           color: "#710193",
           fontSize: 20,
-          paddingStart: 5,
         }}
         font={"OpenSans_600SemiBold"}
       >
-        Techies
+        {title}
       </TextOpen>
-      <Text>12 Members</Text>
+      <Text>{member}</Text>
       </View>
 
       <Image style={{
