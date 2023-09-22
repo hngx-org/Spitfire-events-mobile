@@ -10,6 +10,7 @@ import Home from "./src/screens/Home";
 import Onboarding from "./src/screens/Onboarding";
 import Comments from "./src/screens/Comment";
 import AuthNavigator from "./src/navigators/AuthNavigator";
+import PreviewStack from "./src/navigators/PreviewNavigation";
 // import {AuthContext} from "../context/AuthContext";
 
 const App = () => {
@@ -17,7 +18,9 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <TabNavigator />
+    
+      <PreviewStack />
+      {/*<TabNavigator /> */}
     {/* <Home /> */}
       {/* <Onboarding /> */}
         {/* <Comments /> */}

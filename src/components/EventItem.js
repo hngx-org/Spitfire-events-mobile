@@ -3,8 +3,8 @@ import colors from "../layouts/colors";
 import openSans from "../layouts/fonts";
 import TextOpen from "./TextOpen";
 
-const EventItem = () => {
-
+const EventItem = ({ title, start_time, end_time, location, date}) => {
+  const daysRemaining = Math.ceil((new Date(date).getTime() - new Date().getTime()) / 1000 / 3600 / 24)
   
   return (
     <View style={styles.box}>
@@ -19,46 +19,49 @@ const EventItem = () => {
         <TextOpen 
           style = {styles.title}
           font = {"OpenSans_700Bold"}
-        >Football Game</TextOpen>
+        >{title}</TextOpen>
         <TextOpen 
           style = {styles.date}
           font = {"OpenSans_600SemiBold"}
-        >May 20, 2023</TextOpen>
+        >{new Date(date).toDateString()}</TextOpen>
         <TextOpen 
           style = {styles.time}
           font = {"OpenSans_600SemiBold"}
-        >Friday 4-6pm</TextOpen>
+        >{`${start_time} - ${end_time}`}</TextOpen>
         <TextOpen 
           style = {styles.location}
           font = {"OpenSans_700Bold"}
-        >Teslim Balogun Stadium</TextOpen>
-      <View/>
+        >{location}</TextOpen>
+      </View>
 
       <View
         style={{
-          justifyContent: "space-between",
-          gap: 70,
           alignItems: "flex-end",
+          gap: 70,
+          
         }}
       >
+        <Image
+          source = {require("../../assets/icons/menu-icon.png")}
+          style = {{width: 20, height: 20}}
+        />
         <View style={{flexDirection: "row", gap: 5, alignItems: "center"}}>
-          <View
+          {daysRemaining == 0 && <View
             style={{
               padding: 3,
               backgroundColor: "rgba(0, 200, 0, 1)",
               borderRadius: 3,
             }}
-          ></View>
+          ></View>}
           <Text
             style={{
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: "bold",
               color: "rgba(124, 20, 155, 1)",
             }}
           >
-            LIVE
+            {daysRemaining > 0 ? `Less than ${daysRemaining} days` : (daysRemaining == 0 ? `Live` : "Event Ended")}
           </Text>
-        </View>
         </View>
       </View>
     </View>
@@ -83,11 +86,11 @@ const styles = StyleSheet.create({
     color: "rgba(124, 20, 155, 1)",
   },
   date: {
-    color: "#000",
+    color: "#87748C",
     fontSize: 16,
   },
   time: {
-    color: "#000",
+    color: "#87748C",
     fontSize: 14,
   },
   location: {

@@ -71,7 +71,7 @@ const Onboarding = ({ navigation }) => {
           <TextOpen style={styles.welcome}>
             {JSON.stringify(userInfo)}{" "}
           </TextOpen>
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+          <TouchableOpacity onPress={() => navigation.replace("Loading")}>
             <TextOpen style={styles.signText}>Create an account</TextOpen>
           </TouchableOpacity>
         </View>
@@ -79,11 +79,11 @@ const Onboarding = ({ navigation }) => {
           <CustomBouton
             label={"Continue with Google"}
             provider={"google"}
-            onPress={() => promptAsync()}
+            onPress={() => navigation.replace("Loading")}
           />
           <View style={styles.bottom}>
             <TextOpen style={styles.login}>Have an account ? </TextOpen>
-            <TouchableOpacity onPress={() => promptAsync()}>
+            <TouchableOpacity onPress={() => navigation.replace("Loading")}>
               <TextOpen style={styles.log}>Login</TextOpen>
             </TouchableOpacity>
           </View>
