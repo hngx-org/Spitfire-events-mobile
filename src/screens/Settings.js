@@ -11,7 +11,7 @@ const Settings = () => {
     <View
       style={{
         flex: 1,
-        paddingTop: 30,
+        paddingTop: 10,
         paddingHorizontal: 24,
         backgroundColor: "#FFFCFD",
       }}

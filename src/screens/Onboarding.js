@@ -68,8 +68,8 @@ const Onboarding = ({ navigation }) => {
       <Image source={logo} style={styles.img} />
       <View style={styles.content}>
         <View style={styles.text}>
-          <TextOpen style={styles.welcome}>
-            {JSON.stringify(userInfo)}{" "}
+          <TextOpen font={"OpenSans_600SemiBold"} style={styles.welcome}>
+            Welcome on board
           </TextOpen>
           <TouchableOpacity onPress={() => navigation.replace("Loading")}>
             <TextOpen style={styles.signText}>Create an account</TextOpen>
@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 24,
-    fontWeight: "900",
     ...Platform.select({
       ios: {
         margin: 24,
@@ -137,7 +136,6 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         marginHorizontal: 24,
-        fontWeight: "bold",
       },
       android: {
         marginHorizontal: 0,
@@ -148,7 +146,6 @@ const styles = StyleSheet.create({
       },
     }),
 
-    fontWeight: "900",
     color: "#33313E",
 
   },

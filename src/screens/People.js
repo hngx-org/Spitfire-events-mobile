@@ -18,7 +18,7 @@ const navigation = useNavigation();
     },
 
     {
-      name: 'Techees',
+      name: 'Techies',
       img: require('../../assets/images/techies.png')
     }
   ]

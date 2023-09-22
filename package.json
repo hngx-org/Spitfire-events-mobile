@@ -1,5 +1,5 @@
 {
-  "name": "spitfire",
+  "name": "spitfire-apk",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -33,7 +33,6 @@
     "react-native-calendars": "^1.1301.0",
     "react-native-date-picker": "^4.3.3",
     "react-native-dropdown-picker": "^5.4.6",
-    "react-native-gesture-handler": "~2.12.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-loading-spinner-overlay": "^3.0.1",
     "react-native-pager-view": "6.2.0",
