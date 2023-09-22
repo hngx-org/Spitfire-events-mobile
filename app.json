@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.spitfire.events"
+      "package": "com.silasico.spitfire"
     },
     "web": {
       "favicon": "./assets/favicon.png"
