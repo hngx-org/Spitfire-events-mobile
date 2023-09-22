@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Platform, StatusBar, Pressable } from 'react-native';
 import ImageCard from '../components/People/ImageCard';
@@ -10,11 +11,10 @@ const People = () => {
   //This below is essential for editing the header and all other setOptions where useLayoutEffect helps display certain items before the screen loads
 const navigation = useNavigation();
 
-
   const data = [
     {
-      name: 'Ybnl mafia',
-      img: require('../../assets/images/ybnlmafia.png')
+      name: "Ybnl mafia",
+      img: require("../../assets/images/ybnlmafia.png"),
     },
 
     {
@@ -41,7 +41,6 @@ const navigation = useNavigation();
         <AppButton title={'Add'}/>
       </Pressable>
       </View>
-      
     </View>
   );
 };
@@ -51,10 +50,9 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS == 'android' ? StatusBar.currentHeight : 35,
     paddingHorizontal: 20,
     gap: 20,
-    display: 'flex',
-
+    display: "flex",
   },
-  
+
   header: {
     fontWeight: "bold",
     color: "rgba(124, 20, 155, 1)",
@@ -62,8 +60,8 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    marginTop: 25
-  }
+    marginTop: 25,
+  },
 });
 
 export default People;
