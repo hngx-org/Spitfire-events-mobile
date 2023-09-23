@@ -20,7 +20,8 @@ import logo from "../../assets/icons/logo.png";
 import * as webBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {AuthContext} from "../context/AuthContext";
+import { ScrollView } from "react-native-gesture-handler";
+// import {AuthContext} from "../context/AuthContext";
 
 webBrowser.maybeCompleteAuthSession();
 
@@ -28,7 +29,16 @@ webBrowser.maybeCompleteAuthSession();
 // Android : 176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com
 
 const Onboarding = ({ navigation }) => {
-  const {userInfo, promptAsync, instanceOfGauth} = useContext(AuthContext);
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId:
+      "176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com",
+    iosClientId:
+      "176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com",
+  });
+
+
+  // const {userInfo, promptAsync, instanceOfGauth} = useContext(AuthContext);
   const handleLoginWithGoogle = () => {};
 
   // handling google auth
@@ -39,9 +49,17 @@ const Onboarding = ({ navigation }) => {
   //     "176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com",
   // });
 
-  // React.useEffect(() => {
-  //   handleSignWithGoogl();
-  // }, [response]);
+  let instanceOfGauth = response;
+  let userInfo = request;
+
+  React.useEffect(() => {
+    () => {
+      if(response) {
+        instanceOfGauth = response;
+        userInfo = request;
+      }
+    }
+  }, [response]);
 
   // Test if user is already connected
   // async function handleSignWithGoogl() {
@@ -67,12 +85,15 @@ const Onboarding = ({ navigation }) => {
   // };
   return (
     <SafeAreaView style={styles.container}>
-      <Image source={logo} style={styles.img} />
+      {/* <Image source={logo} style={styles.img} /> */}
       <View style={styles.content}>
         <View style={styles.text}>
-          <TextOpen style={styles.welcome}>
-            {JSON.stringify(instanceOfGauth)}{"   ------------------   "} {JSON.stringify(userInfo)}
-          </TextOpen>
+          <ScrollView style={styles.welcome}>
+            <TextOpen>
+              {/* {JSON.stringify(instanceOfGauth)}{"   ------------------   "} {JSON.stringify(userInfo)} */}
+              {JSON.stringify(instanceOfGauth)}{"   ------------------   "} {JSON.stringify(userInfo)}
+            </TextOpen>
+          </ScrollView>
           <TouchableOpacity onPress={() => navigation.navigate("Register")}>
             <TextOpen style={styles.signText}>Create an account</TextOpen>
           </TouchableOpacity>
@@ -101,7 +122,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingTop: Constants.statusBarHeight + 30,
+    // paddingTop: Constants.statusBarHeight + 30,
   },
   welcome: {
     fontSize: 24,

@@ -3,7 +3,6 @@ import axios from 'axios';
 import React, {createContext, useEffect, useState} from 'react';
 import * as webBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {BASE_URL} from '../config';
 
 
@@ -13,12 +12,12 @@ webBrowser.maybeCompleteAuthSession();
 
 
 
-export const AuthContext = createContext();
+export const AuthContext = React.createContext();
 
 export const AuthProvider = ({children}) => {
-  const [userInfo, setUserInfo] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [instanceOfGauth, setInstanceOfGauth] = useState("");
+  const [userInfo, setUserInfo] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [instanceOfGauth, setInstanceOfGauth] = React.useState("");
 
   // handling google auth
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -123,7 +122,7 @@ export const AuthProvider = ({children}) => {
     login();
   }, [response]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     isLoggedIn();
   }, []);
 
