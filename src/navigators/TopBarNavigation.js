@@ -7,7 +7,7 @@ const Tab = createMaterialTopTabNavigator();
 
 const TopBarNavigator = () => {
   return (
-    <EventContextProvider>
+    // <EventContextProvider>
       <Tab.Navigator
         initialRouteName="Everyone"
         screenOptions={{
@@ -18,17 +18,19 @@ const TopBarNavigator = () => {
         }}
         
       >
-        <Tab.Screen
-          name="Friends"
-          component={FriendEvents}
-        />
+        
         <Tab.Screen
           name="Everyone"
           component={AllEvents}
         />
+
+        {/* <Tab.Screen
+          name="Friends"
+          component={FriendEvents}
+        /> */}
         
       </Tab.Navigator>
-    </EventContextProvider>
+    // </EventContextProvider>
   );
 }
 

@@ -24,3 +24,15 @@ export const dataReducer = (state, action ) => {
             return state
     }
 }
+
+export const DataContextProvider = ({children}) => {
+    const [state, dispatch] = useReducer(dataReducer, {
+        data: []
+    })
+
+    return (
+        <DataContext.Provider value={{...state, dispatch}}>
+            { children }
+        </DataContext.Provider>
+    )
+} 
