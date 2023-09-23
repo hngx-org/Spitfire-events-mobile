@@ -39,7 +39,7 @@ const Settings = () => {
             <Image
               style={{width: 62, height: 62, borderRadius: 40}}
               source={{
-                uri: userInfo.profile,
+                uri: userInfo.avatar,
               }}
             />
           </View>
