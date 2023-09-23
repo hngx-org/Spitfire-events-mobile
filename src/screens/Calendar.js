@@ -1,37 +1,55 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import {View, Text, FlatList, ScrollView} from "react-native";
 import {Calendar, LocaleConfig} from "react-native-calendars";
 import EventDetails from "../components/CalendarScreen/EventDetails";
 import CalendarHeader from "../components/CalendarScreen/CalendarHeader";
-import eventData from "../services/EventData";
+import { AuthContext } from "../context/AuthContext";
+// import eventData from "../services/EventData";
 
 const CalendarScreen = () => {
   const [markedDates, setMarkedDates] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [events, setEvents] = useState([]);
 
-  // useEffect(() => {
-  //   // Fetch event data from your API here and update the 'events' state.
-  //   // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint.
+  const {userInfo} = useContext(AuthContext);
+
+  // const fetchEventDetails = () => {
+  //   setIsLoading(true);
+
   //   axios
-  //     .get("YOUR_API_ENDPOINT")
-  //     .then((response) => {
-  //       const eventData = response.data;
-
-  //       const marked = {};
-  //       eventData.forEach((event) => {
-  //         marked[event.date] = {marked: true};
-  //       });
-
-  //       setMarkedDates(marked);
-  //       setEvents(eventData);
+  //     .get(
+  //       `${BASE_URL}/api/events`,
+  //       {},
+  //       {
+  //         headers: {Authorization: `Bearer ${userInfo.token}`},
+  //       }
+  //     )
+  //     .then((res) => {
+  //       const eventData = res.data;
   //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
+  //     .catch((e) => {
+  //       alert(`Error while getting event ${e}`);
+  //       setIsLoading(false);
   //     });
-  // }, []);
+  // };
+
   useEffect(() => {
-    // Use the eventData array instead of fetching data from an API
+    axios
+      .get(
+        `${BASE_URL}/api/events`,
+        {},
+        {
+          headers: {Authorization: `Bearer ${userInfo.token}`},
+        }
+      )
+      .then((res) => {
+        const eventData = res.data;
+      })
+      .catch((e) => {
+        alert(`Error while getting event ${e}`);
+        setIsLoading(false);
+      });
+
     const marked = {};
     eventData.forEach((event) => {
       marked[event.date] = {marked: true};
