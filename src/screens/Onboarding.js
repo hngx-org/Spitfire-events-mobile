@@ -42,6 +42,8 @@ const Onboarding = (
       "176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com",
     iosClientId:
       "176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com",
+    clientId:
+      "600277501504-qejpae95g3rumhintj9vai9al289osjr.apps.googleusercontent.com",
   });
 
   React.useEffect(() => {
@@ -53,7 +55,8 @@ const Onboarding = (
     const user = await AsyncStorage.getItem("userInfo");
     if (!user) {
       if (response?.type === "success") {
-        await getUserInfo(response.authentication.accessToken);
+        // await getUserInfo(response.authentication.accessToken);
+        setUserInfo(response);
       }
     } else {
       setUserInfo(JSON.parse(user));
@@ -84,7 +87,7 @@ const Onboarding = (
       <View style={styles.content}>
         <View style={styles.text}>
           <TextOpen font={"OpenSans_600SemiBold"} style={styles.welcome}>
-            Welcome on board
+            {JSON.stringify(userInfo)}
           </TextOpen>
           <TouchableOpacity 
           // onPress={() => navigation.navigate("Register")}
