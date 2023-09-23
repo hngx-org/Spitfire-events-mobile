@@ -5,10 +5,25 @@ import CalendarScreen from "../screens/Calendar";
 import PeopleStack from "../navigators/PeopleStack";
 import { Ionicons } from '@expo/vector-icons';
 import colors from "../layouts/colors";
+import { useEffect } from "react";
+import {Alert} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const navigation = useNavigation();
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     Alert.alert('User!','Logged in successfully, do you want to continue to the app',[{text:'Yes',onPress:()=> alert('Welcome to WetinDeySup App')},{text:'No',onPress:()=> { navigation.goBack();
+  //       alert('Sorry, you cant access this page');
+  //     }
+  //   }]);
+  //   }, 2000);
+  // }, [])
+
+
   return (
     <Tab.Navigator 
     screenOptions={({ route, navigation }) => ({

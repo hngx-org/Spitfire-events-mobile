@@ -13,7 +13,7 @@ const PeopleStack = () => {
       <Stack.Screen name={"PeopleStack"} component={People} />
       <Stack.Screen name={"PeopleView"} component={PeopleView} />
       <Stack.Screen name={"Techees"} component={Techees} /> 
-      <Stack.Screen name={"YbnlMafia"} component={YbnlMafia} /> 
+      <Stack.Screen name={"YbnlMafia"} component={YbnlMafia} />
       <Stack.Screen name={"Comment"} component={Comment} />
     </Stack.Navigator>
   );
