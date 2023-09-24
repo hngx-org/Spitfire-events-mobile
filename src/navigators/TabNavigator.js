@@ -14,14 +14,14 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     Alert.alert('User!','Logged in successfully, do you want to continue to the app',[{text:'Yes',onPress:()=> alert('Welcome to WetinDeySup App')},{text:'No',onPress:()=> { navigation.goBack();
-  //       alert('Sorry, you cant access this page');
-  //     }
-  //   }]);
-  //   }, 2000);
-  // }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      Alert.alert('User!','Logged in successfully, do you want to continue to the app',[{text:'Yes',onPress:()=> alert('Welcome to WetinDeySup App')},{text:'No',onPress:()=> { navigation.goBack();
+        alert('Sorry, you cant access this page');
+      }
+    }]);
+    }, 2000);
+  }, [])
 
 
   return (
