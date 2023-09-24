@@ -12,13 +12,13 @@ export const dataReducer = (state, action ) => {
 
         case 'CREATE_DATA':     
             return {
-                data: [action.payload, ...state.data]
+                data: [action.payload, ...state.data.data]
             } 
             
-        case 'DELETE_DATA': 
-            return {
-                data: state.data.filter((d)=>{ d._id !== action.payload._id})
-            }
+        // case 'DELETE_DATA': 
+        //     return {
+        //         data: state.data.filter((d)=>{ d.id !== action.payload.id})
+        //     }
     
         default:
             return state

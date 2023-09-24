@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, Pressable, Image } from 'react-native'
+import { StyleSheet, Text, View, TextInput, ScrollView, Pressable, Image, Alert } from 'react-native'
 import React, { useState, useReducer } from 'react'
 import Constants from "expo-constants"
 import DateTimePicker from "@react-native-community/datetimepicker"
@@ -10,6 +10,7 @@ import TextOpen from "../components/TextOpen"
 import AppButton from "../components/AppButton"
 import DropdownPicker from "react-native-dropdown-picker"
 import { useNavigation } from '@react-navigation/native';
+import { useDataContext } from '../hooks/useDataContext'
 
 const pickerReducer = (state, action) => {
   switch (action.type) {
@@ -53,6 +54,8 @@ const CreateEvent = () => {
   //This below is essential for passing data between screens, accessing the navigation props. AND ADDING A FUNCTIONAL ELEMENT(AND ICONS) TO THE DEFAULT HEADER, before this useNavigation can be used, the component has to in one way or the other(directly or indirectly) be wrapped in a navigatorContainer
 const navigation = useNavigation();
 
+const {data, dispatch: dispatcher} = useDataContext()
+
   const groups = [
     {
       value: 1,
@@ -68,6 +71,34 @@ const navigation = useNavigation();
   const [newEvent, setNewEvent] = useState({})
   const [formatted, setFormatted] = useState({})
   
+  const onSubmit = async () => {
+
+    newEvent.creator_id = '1234'
+    newEvent.thumbnail = '../assets/'
+    newEvent.title = 'first event'
+
+    const Event = newEvent
+    // Alert.alert('successfully created', JSON.stringify(Event))
+    const response = await fetch(`https://spitfire.onrender.com/api/events`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({creator_id: Event.creator_id, description: Event.description, title: Event.title, location: Event.location, thumbnail: Event.thumbnail, start_time: Event.start_date, end_time: Event.end_date, end_date: Event.end_date, start_date: Event.start_date }) 
+        })
+
+    const json = await response.json()
+
+    if(!response.ok){
+      Alert.alert('An Error occured while creating new event', JSON.stringify(json.message))
+    }
+
+    if(response.ok) {
+      dispatcher({type: 'CREATE_DATA', payload: json.data})
+      Alert.alert('successfully created', JSON.stringify(json.message))
+    }
+  }
+
   return (
     <View style = { styles.container}>
     
@@ -78,7 +109,7 @@ const navigation = useNavigation();
         onChange = {(e, selectedDate) => {
           setDate(selectedDate)
           setFormatted({...formatted, startDate: `${selectedDate.getUTCDate()}/${(selectedDate.getUTCMonth() + 1) < 10 ? "0" + (selectedDate.getUTCMonth() + 1) : selectedDate.getUTCMonth()+ 1}/${selectedDate.getUTCFullYear()}`});
-          setNewEvent({...newEvent, startDate: selectedDate})
+          setNewEvent({...newEvent, start_date: selectedDate})
           dispatch({type: "START_DATE_CLOSE"})
         }}
         minimumDate = {new Date()}
@@ -91,7 +122,7 @@ const navigation = useNavigation();
         onChange = {(e, selectedDate) => {
           setDate(selectedDate)
           setFormatted({...formatted, endDate: `${selectedDate.getUTCDate()}/${(selectedDate.getUTCMonth() + 1) < 10 ? "0" + (selectedDate.getUTCMonth() + 1) : selectedDate.getUTCMonth()+ 1}/${selectedDate.getUTCFullYear()}`});
-          setNewEvent({...newEvent, endDate: selectedDate})
+          setNewEvent({...newEvent, end_date: selectedDate})
           dispatch({type: "END_DATE_CLOSE"})
           
         }}
@@ -105,8 +136,8 @@ const navigation = useNavigation();
         mode = {"time"}
         onChange = {(e, selectedDate) => {
           setDate(selectedDate)
-          setFormatted({...formatted, startTime: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
-          setNewEvent({...newEvent, startDate: selectedDate})
+          setFormatted({...formatted, startDate: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
+          setNewEvent({...newEvent, start_time: selectedDate})
           dispatch({type: "START_TIME_CLOSE"})
         }}
         minimumDate = {new Date()}
@@ -118,8 +149,8 @@ const navigation = useNavigation();
         mode = {"time"}
         onChange = {(e, selectedDate) => {
           setDate(selectedDate)
-          setFormatted({...formatted, endTime: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
-          setNewEvent({...newEvent, endDate: selectedDate})
+          setFormatted({...formatted, endDate: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
+          setNewEvent({...newEvent, end_time: selectedDate})
           dispatch({type: "END_TIME_CLOSE"})
         }}
         minimumDate = {newEvent.startDate}
@@ -142,7 +173,7 @@ const navigation = useNavigation();
             font = {"OpenSans_600SemiBold"}
           >Event Description</TextOpen>
           <CreateEventInputBox
-            onChangeText = {(val) => setNewEvent({...newEvent, title: val})}
+            onChangeText = {(val) => setNewEvent({...newEvent, description: val})}
             button = {false}
             numberOfLines = {1}
           />
@@ -257,7 +288,8 @@ const navigation = useNavigation();
         
         <AppButton
           onPress = {() => {
-            console.log(newEvent);
+            onSubmit()
+            // Alert.alert('new event', JSON.stringify(newEvent));
           }}
           title = {"Create Event"}
           style = {{marginVertical: 20}}
