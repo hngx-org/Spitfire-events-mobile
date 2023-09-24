@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const Settings = () => {
 
-  const {userInfo} = useContext(AuthContext);
+  // const {userInfo} = useContext(AuthContext);
   
   return (
     <View
@@ -41,9 +41,7 @@ const Settings = () => {
           >
             <Image
               style={{width: 62, height: 62, borderRadius: 40}}
-              source={{
-                uri: userInfo.avatar,
-              }}
+              source={require('../../assets/profile.jpg')}
             />
           </View>
           <TextOpen
@@ -53,7 +51,8 @@ const Settings = () => {
               fontSize: 15,
             }}
           >
-            {userInfo.name}
+            {/* {userInfo.name} */}
+Salome
           </TextOpen>
           <TextOpen
             style={{
@@ -61,7 +60,8 @@ const Settings = () => {
               fontSize: 12,
             }}
           >
-            {userInfo.email}
+            {/* {userInfo.email} */}
+salome357@gmail.com
           </TextOpen>
         </View>
       </View>
