@@ -3,7 +3,7 @@ import {View, Text, FlatList, ScrollView} from "react-native";
 import {Calendar, LocaleConfig} from "react-native-calendars";
 import EventDetails from "../components/CalendarScreen/EventDetails";
 import CalendarHeader from "../components/CalendarScreen/CalendarHeader";
-import eventData from "../services/EventData";
+import axios from "axios";
 
 const CalendarScreen = () => {
   const [markedDates, setMarkedDates] = useState({});
@@ -31,7 +31,18 @@ const CalendarScreen = () => {
   //     });
   // }, []);
   useEffect(() => {
-    // Use the eventData array instead of fetching data from an API
+    axios
+      .get(
+        `https://spitfire.onrender.com/api/events`
+      )
+      .then((res) => {
+        const eventData = res.data;
+      })
+      .catch((e) => {
+        alert(`Error while getting event ${e}`);
+        setIsLoading(false);
+      });
+
     const marked = {};
     eventData.forEach((event) => {
       marked[event.date] = {marked: true};

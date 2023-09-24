@@ -24,10 +24,10 @@ const TopBarNavigator = () => {
           component={AllEvents}
         />
 
-        {/* <Tab.Screen
+        <Tab.Screen
           name="Friends"
           component={FriendEvents}
-        /> */}
+        />
         
       </Tab.Navigator>
     // </EventContextProvider>

@@ -11,7 +11,8 @@ import CommentCard from '../components/People/commentCard';
 
 
 const Comment = () => {
-  const comments = [
+  const [newComment, setNewComment] = useState('');
+  const [comments, setComments] = useState([
     { id: 1, name: 'John Doe', comment: 'Thank you for showing this Event to me', date: "2023-09-20", },
     { id: 2, name: 'Jane Smith', comment: 'Thank you for showing this Event to me', date: "2023-09-22", },
     { id: 3, name: 'Alice Johnson', comment: 'Thank you for showing this Event to me', date: "2023-09-25", },
@@ -22,7 +23,7 @@ const Comment = () => {
     { id: 28, name: 'Henry Morgan', comment: 'Thank you for showing this Event to me', date: "2023-10-11", },
     { id: 29, name: 'Sofia Bennett', comment: 'Thank you for showing this Event to me', date: "2023-10-15", },
     { id: 30, name: 'Jack Davis', comment: 'Thank you for showing this Event to me', date: "2023-10-19", },
-  ];
+  ])
 
 
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
@@ -38,7 +39,19 @@ const Comment = () => {
   const onDisplay = ()=>{
     setDisplay('none');
   };
-
+  const addComment = () => {
+    if (newComment.trim() !== '' ) {
+      const today = new Date();
+      const comment = {
+        id: Math.floor(Math.random()*10000),
+        name: 'Mr Mark',
+        comment: newComment,
+        date: `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`,
+      };
+      setComments([...comments, comment]);
+      setNewComment('');
+    }
+  };
 
   return (
     <View style={styles.contactscontainer}>
@@ -81,11 +94,13 @@ const Comment = () => {
             backgroundColor: 'white',
           }}
           placeholder={isKeyboardVisible ? 'Send your Comment...' : 'Click to start typing...'}
+          onChangeText={(text) => setNewComment(text)}
           onFocus={() => setKeyboardVisible(true)}
           onBlur={() => setKeyboardVisible(false)}
+          value={newComment}
         />
         {isKeyboardVisible ? <TouchableOpacity onPress={() => handleIconPress()}>
-          <Icon name={isKeyboardVisible ? 'send' : 'image'} size={40} color={colors.primary} style={{paddingLeft: 7,}} />
+          <Icon name={isKeyboardVisible ? 'send' : 'image'} size={40} color={colors.primary} style={{paddingLeft: 7,}}  onPress={addComment}/>
         </TouchableOpacity>
         :<><TouchableOpacity onPress={() => handleIconPress()}>
           <Icon name={isKeyboardVisible ? 'send' : 'image-outline'} size={24} color="grey" />

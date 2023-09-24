@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { EventContext } from "../context/EventContext"
 import useFetch from "../hooks/useFetch"
 import { useDataContext } from "../hooks/useDataContext"
-// import eventApi from '../api/events'
+
 
 const AllEvents = () => {
   const navigation = useNavigation()
@@ -14,8 +14,6 @@ const AllEvents = () => {
 const [events, setEvents] = useState([])
 
   useEffect(()=>{
-
-    // loadEvents()
 
     const fetchData = async () => {
         const response = await fetch(`https://spitfire.onrender.com/api/events`, {
