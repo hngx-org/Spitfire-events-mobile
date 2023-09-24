@@ -4,11 +4,11 @@
     "slug": "spitfire",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
@@ -16,23 +16,22 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.spitfire.events",
-      "buildNumber": "1.0.0"
+      "bundleIdentifier": "com.spitfire.events"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.spitfire.events",
-      "versionCode": 1
+      "package": "com.spitfire.events"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "scheme": "myapp",
     "extra": {
       "eas": {
-        "projectId": "24a51521-f75c-43c4-b28c-e6920b7940e3"
+        "projectId": "21113237-63a4-4688-85fa-072a6c3966a3"
       }
     }
   }

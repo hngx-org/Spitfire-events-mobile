@@ -51,6 +51,8 @@ const CreateEvent = () => {
   const [openDropdown, setOpenDropdown] = useState(false)
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null);
+  const [startTime, setStartTime] = useState(null)
+  const [endTime, setEndTime] = useState(null);
   //This below is essential for passing data between screens, accessing the navigation props. AND ADDING A FUNCTIONAL ELEMENT(AND ICONS) TO THE DEFAULT HEADER, before this useNavigation can be used, the component has to in one way or the other(directly or indirectly) be wrapped in a navigatorContainer
 const navigation = useNavigation();
 
@@ -73,18 +75,41 @@ const {data, dispatch: dispatcher} = useDataContext()
   
   const onSubmit = async () => {
 
-    newEvent.creator_id = '1234'
-    newEvent.thumbnail = '../assets/'
-    newEvent.title = 'first event'
+    setNewEvent({
+      ...newEvent,
+      creator_id : '1234',
+      thumbnail : '../assets/',
+      title : 'first event',
+    })
+
 
     const Event = newEvent
     // Alert.alert('successfully created', JSON.stringify(Event))
+    // const response = await fetch(`https://spitfire.onrender.com/api/events`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //           creator_id: Event.creator_id,
+    //           description: Event.description,
+    //           title: Event.title,
+    //           location: Event.location,
+    //           thumbnail: Event.thumbnail,
+    //           start_time: Event.start_time,
+    //           end_time: Event.end_time,
+    //           end_date: Event.end_date,
+    //           start_date: Event.start_date,
+    //           }) 
+    //     })
+
+
     const response = await fetch(`https://spitfire.onrender.com/api/events`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({creator_id: Event.creator_id, description: Event.description, title: Event.title, location: Event.location, thumbnail: Event.thumbnail, start_time: Event.start_date, end_time: Event.end_date, end_date: Event.end_date, start_date: Event.start_date }) 
+            body: JSON.stringify(Event) 
         })
 
     const json = await response.json()
@@ -107,7 +132,7 @@ const {data, dispatch: dispatcher} = useDataContext()
         value = {date}
         mode = {"date"}
         onChange = {(e, selectedDate) => {
-          setDate(selectedDate)
+          setStartDate(selectedDate)
           setFormatted({...formatted, startDate: `${selectedDate.getUTCDate()}/${(selectedDate.getUTCMonth() + 1) < 10 ? "0" + (selectedDate.getUTCMonth() + 1) : selectedDate.getUTCMonth()+ 1}/${selectedDate.getUTCFullYear()}`});
           setNewEvent({...newEvent, start_date: selectedDate})
           dispatch({type: "START_DATE_CLOSE"})
@@ -120,7 +145,7 @@ const {data, dispatch: dispatcher} = useDataContext()
         value = {date}
         mode = {"date"}
         onChange = {(e, selectedDate) => {
-          setDate(selectedDate)
+          setEndDate(selectedDate)
           setFormatted({...formatted, endDate: `${selectedDate.getUTCDate()}/${(selectedDate.getUTCMonth() + 1) < 10 ? "0" + (selectedDate.getUTCMonth() + 1) : selectedDate.getUTCMonth()+ 1}/${selectedDate.getUTCFullYear()}`});
           setNewEvent({...newEvent, end_date: selectedDate})
           dispatch({type: "END_DATE_CLOSE"})
@@ -135,7 +160,7 @@ const {data, dispatch: dispatcher} = useDataContext()
         value = {date}
         mode = {"time"}
         onChange = {(e, selectedDate) => {
-          setDate(selectedDate)
+          setStartTime(selectedDate)
           setFormatted({...formatted, startDate: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
           setNewEvent({...newEvent, start_time: selectedDate})
           dispatch({type: "START_TIME_CLOSE"})
@@ -148,7 +173,7 @@ const {data, dispatch: dispatcher} = useDataContext()
         value = {date}
         mode = {"time"}
         onChange = {(e, selectedDate) => {
-          setDate(selectedDate)
+          setEndTime(selectedDate)
           setFormatted({...formatted, endDate: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
           setNewEvent({...newEvent, end_time: selectedDate})
           dispatch({type: "END_TIME_CLOSE"})
@@ -269,7 +294,7 @@ const {data, dispatch: dispatcher} = useDataContext()
             }}
             placeholderStyle={{ fontSize: 16 }}
             placeholder={newEvent?.group || ""}
-            onPress={() => setOpenDropdown(!openDropdown)}
+            onPress={() => {setOpenDropdown( () => !openDropdown)}}
             keyExtractor={(item, index) => item}
             dropDownContainerStyle={{
               borderColor: colors.inputBorder,
@@ -278,6 +303,7 @@ const {data, dispatch: dispatcher} = useDataContext()
             }}
             textStyle={{ fontSize: 16, }}
             onSelectItem={(val) => {
+              setSelectedGroup(val.label)
               setNewEvent({...newEvent, group: val.label})
               setOpenDropdown(false);
             }}

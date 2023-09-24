@@ -18,56 +18,9 @@ import Input from "../components/onboarding/Input";
 import { StatusBar } from "expo-status-bar";
 import logo from "../../assets/icons/logo.png";
 import { useNavigation } from '@react-navigation/native';
-//uncomment these three
-// import * as webBrowser from "expo-web-browser";
-// import * as Google from "expo-auth-session/providers/google";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// webBrowser.maybeCompleteAuthSession();
-
-// IOS : 176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com
-// Android : 176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com
-
-const Onboarding = (
-  // { navigation }
-  ) => {
+const Onboarding = () => {
   const navigation = useNavigation();
-//   const [userInfo, setUserInfo] = React.useState(null);
-//   const handleLoginWithGoogle = () => {};
-
-//   // handling google auth
-//   const [request, response, promptAsync] = Google.useAuthRequest({
-//     androidClientId:
-//       "176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com",
-//     iosClientId:
-//       "176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com",
-//   });
-
-//   React.useEffect(() => {
-//     handleSignWithGoogl();
-//   }, [response]);
-
-  // Test if user is already connected
-  // async function handleSignWithGoogl() {
-  //   const user = await AsyncStorage.getItem("@user");
-  //   if (!user) {
-  //     if (response?.type === "success") {
-  //       await getUserInfo(response.authentication.accessToken);
-  //     }
-  //   } else {
-  //     setUserInfo(JSON.parse(user));
-  //   }
-  // }
-
-  // get user info from google
-  // const getUserInfo = async (token) => {
-  //   const response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   });
-  //   const user = await response.json();
-  //   await AsyncStorage.setItem("@user", JSON.stringify(user));
-  //   setUserInfo(user);
-  // };
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.img} />
