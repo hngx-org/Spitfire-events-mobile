@@ -1,8 +1,11 @@
 import { View, ActivityIndicator } from "react-native"
 import { useEffect } from "react"
 import colors from "../layouts/colors"
+import { useNavigation } from "@react-navigation/native"
 
-const Loading = ({ navigation }) => {
+
+const Loading = ({  }) => {
+  const navigation = useNavigation()
   useEffect(() => {
     setTimeout(() => {
       navigation.replace("Tabs")

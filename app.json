@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "spitfire",
-    "slug": "spitfire-apk",
+    "slug": "spitfire",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,12 +11,13 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.spitfire.events"
     },
-
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -30,7 +31,7 @@
     "scheme": "myapp",
     "extra": {
       "eas": {
-        
+        "projectId": "21113237-63a4-4688-85fa-072a6c3966a3"
       }
     }
   }

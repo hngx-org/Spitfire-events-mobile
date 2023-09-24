@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { EventContext } from "../context/EventContext"
 import useFetch from "../hooks/useFetch"
 import { useDataContext } from "../hooks/useDataContext"
-import eventApi from '../api/events'
+// import eventApi from '../api/events'
 
 const AllEvents = () => {
   const navigation = useNavigation()
