@@ -4,11 +4,14 @@ import {Calendar, LocaleConfig} from "react-native-calendars";
 import EventDetails from "../components/CalendarScreen/EventDetails";
 import CalendarHeader from "../components/CalendarScreen/CalendarHeader";
 import axios from "axios";
+import { useDataContext } from "../hooks/useDataContext";
+import EventsItem from "../components/EventsItem";
 
 const CalendarScreen = () => {
   const [markedDates, setMarkedDates] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
-  const [events, setEvents] = useState([]);
+  // const [events, setEvents] = useState([]);
+  const {events, dispatch} = useDataContext()
 
   // useEffect(() => {
   //   // Fetch event data from your API here and update the 'events' state.
@@ -43,15 +46,63 @@ const CalendarScreen = () => {
         alert(`Error while getting event ${e}`);
         setIsLoading(false);
       });
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://spitfire.onrender.com/api/events`
+  //     )
+  //     .then((res) => {
+  //       const eventData = res.data;
+  //     })
+  //     .catch((e) => {
+  //       alert(`Error while getting event ${e}`);
+  //       setIsLoading(false);
+  //     });
 
     const marked = {};
     eventData && eventData.length > 0 && eventData.forEach((event) => {
       marked[event.date] = {marked: true};
     });
+  }, [])
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://spitfire.onrender.com/api/events`
+  //     )
+  //     .then((res) => {
+  //       const eventData = res.data;
+  //     })
+  //     .catch((e) => {
+  //       alert(`Error while getting event ${e}`);
+  //       setIsLoading(false);
+  //     });
 
-    setMarkedDates(marked);
-    setEvents(eventData);
-  }, []);
+  //   const marked = {};
+  //   eventData.forEach((event) => {
+  //     marked[event.date] = {marked: true};
+  //   });
+
+  //   setMarkedDates(marked);
+  //   setEvents(eventData);
+  // }, []);
+
+  useEffect(()=> {
+
+    const fetchData = async () => {
+        const response = await fetch(`https://spitfire.onrender.com/api/events`, {
+      
+        })
+        const json = await response.json()
+
+        if(response.ok){
+            dispatch({type: 'SET_DATA', payload: json})
+    
+        }    
+    }
+    
+    fetchData()
+    
+    }, [])
 
   const calendarTheme = {
     calendarBackground: "#F0E8F2", // Background color of the calendar
@@ -100,7 +151,15 @@ const CalendarScreen = () => {
           <FlatList
             data={events && events.filter((event) => event.date === selectedDate)}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={EventDetails}
+            renderItem={
+              <EventsItem   
+                title = {item.description}
+                date = {item.start_date}
+                start_time = {item.start_time}
+                end_time = {item.end_time}
+                location = {item.location}
+              />
+            }
             
           />}
         </View>

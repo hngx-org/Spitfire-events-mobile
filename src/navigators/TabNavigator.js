@@ -11,8 +11,8 @@ import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
-  const navigation = useNavigation();
+const TabNavigator = ({navigation}) => {
+  // const navigation = useNavigation();
 
   useEffect(() => {
     // setTimeout(() => {

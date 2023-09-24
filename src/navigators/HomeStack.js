@@ -4,7 +4,7 @@ import CreateEvent from "../screens/CreateEvent"
 
 const Stack = createStackNavigator()
 
-const HomeStack = () => {
+const HomeStack = ({navigation}) => {
   return (
     <Stack.Navigator 
       screenOptions = {{headerShown: false}}

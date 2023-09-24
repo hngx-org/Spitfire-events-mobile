@@ -41,7 +41,7 @@ const [events, setEvents] = useState([])
         renderItem = {({ item }) => (
           
             <EventsItem   
-              title = {item.title}
+              title = {item.description}
               date = {item.start_date}
               start_time = {item.start_time}
               end_time = {item.end_time}
