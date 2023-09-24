@@ -12,24 +12,31 @@ import Comments from "./src/screens/Comment";
 import AuthNavigator from "./src/navigators/AuthNavigator";
 import PreviewStack from "./src/navigators/PreviewNavigation";
 // import {AuthContext} from "../context/AuthContext";
+import { DataContextProvider } from "./src/context/DataContext";
+import HomeStack from "./src/navigators/HomeStack";
+import AllEvents from "./src/screens/AllEvents";
 
 const App = () => {
   // const {userInfo} = useContext(AuthContext);
 
   return (
-    <NavigationContainer>
-    
-      <PreviewStack />
-      {/*<TabNavigator /> */}
-    {/* <Home /> */}
-      {/* <Onboarding /> */}
-        {/* <Comments /> */}
-      
-      {/* <AuthNavigator/> */}
-{/* {userInfo.token ? <TabNavigator /> : <AuthNavigator />} */}
-      {/*</Stack.Navigator> */}
+      <NavigationContainer>
+        <DataContextProvider>
+          <PreviewStack />
+          {/* <TabNavigator /> */}
+          {/* <HomeStack/> */}
+          {/* <AllEvents/> */}
+        </DataContextProvider>
+      {/* <Home /> */}
+        {/* <Onboarding /> */}
+          {/* <Comments /> */}
+        
+        {/* <AuthNavigator/> */}
+      {/* {userInfo.token ? <TabNavigator /> : <AuthNavigator />} */}
+        {/*</Stack.Navigator> */}
 
-    </NavigationContainer>
+      </NavigationContainer>
+
   );
 };
 

@@ -59,7 +59,6 @@ const CalendarScreen = () => {
     <View
       style={{
         flex: 1,
-        paddingTop: 30,
         paddingHorizontal: 24,
         backgroundColor: "#FFFCFD",
       }}

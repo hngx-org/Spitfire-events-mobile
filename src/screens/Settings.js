@@ -1,17 +1,20 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from "react-native";
-import React from "react";
+import React, {useContext} from "react";
 import SettingsHeader from "../components/Settings/SettingsHeader";
-import {userInfo} from "../services/User";
 import TextOpen from "../components/TextOpen";
 import {Ionicons} from "@expo/vector-icons";
 import {SimpleLineIcons} from "@expo/vector-icons";
+import { AuthContext } from "../context/AuthContext";
 
 const Settings = () => {
+
+  const {userInfo} = useContext(AuthContext);
+  
   return (
     <View
       style={{
         flex: 1,
-        paddingTop: 30,
+        paddingTop: 10,
         paddingHorizontal: 24,
         backgroundColor: "#FFFCFD",
       }}
@@ -39,7 +42,7 @@ const Settings = () => {
             <Image
               style={{width: 62, height: 62, borderRadius: 40}}
               source={{
-                uri: userInfo.profile,
+                uri: userInfo.avatar,
               }}
             />
           </View>

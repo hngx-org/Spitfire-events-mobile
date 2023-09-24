@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "spitfire",
-    "slug": "spitfire",
+    "slug": "spitfire-apk",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
