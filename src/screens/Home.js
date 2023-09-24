@@ -7,10 +7,10 @@ import TextOpen from "../components/TextOpen"
 const Home = () => {
   return (
     <View style = { styles.container}>
-      <TextOpen 
+      {/* <TextOpen 
         style = {styles.header}
         font = {"OpenSans_700Bold"}
-      >Timeline</TextOpen>
+      >Timeline</TextOpen> */}
       
       <TopBarNavigator />
     </View>
