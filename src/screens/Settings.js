@@ -5,9 +5,10 @@ import TextOpen from "../components/TextOpen";
 import {Ionicons} from "@expo/vector-icons";
 import {SimpleLineIcons} from "@expo/vector-icons";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigation } from '@react-navigation/native';
 
 const Settings = () => {
-
+  const navigation = useNavigation();
   // const {userInfo} = useContext(AuthContext);
   
   return (
@@ -288,6 +289,9 @@ salome357@gmail.com
       <TouchableOpacity
         style={{
           flexDirection: "row",
+        }} onPress={()=> { navigation.goBack();
+          navigation.goBack();
+          alert('Logged out Successfully');
         }}
       >
         <SimpleLineIcons name="logout" size={24} color="#EA3131" style={{
