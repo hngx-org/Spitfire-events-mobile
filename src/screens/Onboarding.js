@@ -143,24 +143,24 @@ const { promptAsync } = useContext(AuthContext)
           </TouchableOpacity>
         </View>
         <View style={styles.action}>
-          <CustomBouton
+          {/* <CustomBouton
             label={"Continue with Google"}
             provider={"google"}
             // onPress={() => promptAsync()}
             onPress={() => {navigation.navigate("Loading")}}
-          />
-          {/* <View style={styles.bottom}>
+          /> */}
+          <View style={styles.bottom}>
             <TextOpen style={styles.login}>Have an account ? </TextOpen>
             <TouchableOpacity 
             // onPress={() => promptAsync()}
             onPress={() => {
-              promptAsync()
-              // {navigation.navigate("Loading")}
+              // promptAsync()
+              {navigation.navigate("Loading")}
             }}
             >
               <TextOpen style={styles.log}>Login</TextOpen>
             </TouchableOpacity>
-          </View> */}
+          </View>
         </View>
       </View>
     </SafeAreaView>

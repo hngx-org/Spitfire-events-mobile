@@ -31,12 +31,13 @@ const CalendarScreen = () => {
   //     });
   // }, []);
   useEffect(() => {
+    let eventData;
     axios
       .get(
         `https://spitfire.onrender.com/api/events`
       )
       .then((res) => {
-        const eventData = res.data;
+        eventData = res.data;
       })
       .catch((e) => {
         alert(`Error while getting event ${e}`);
@@ -44,7 +45,7 @@ const CalendarScreen = () => {
       });
 
     const marked = {};
-    eventData.forEach((event) => {
+    eventData && eventData.length > 0 && eventData.forEach((event) => {
       marked[event.date] = {marked: true};
     });
 
@@ -86,7 +87,7 @@ const CalendarScreen = () => {
         style={{borderRadius: 15,}}
           markedDates={markedDates}
           onDayPress={(day) => {
-            setSelectedDate(day.dateString);
+            setSelectedDate(day?.dateString);
           }}
           theme={calendarTheme} // Apply the custom theme
         />
@@ -94,12 +95,14 @@ const CalendarScreen = () => {
 
       {selectedDate && (
         <View>
+          {!events || (events.filter((event) => event.date === selectedDate).length < 1) ? 
+          <Text>No Event for selected date...</Text> :
           <FlatList
-            data={events.filter((event) => event.date === selectedDate)}
+            data={events && events.filter((event) => event.date === selectedDate)}
             keyExtractor={(item) => item.id.toString()}
             renderItem={EventDetails}
             
-          />
+          />}
         </View>
       )}
     </View>

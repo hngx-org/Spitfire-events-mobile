@@ -11,6 +11,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [splashLoading, setSplashLoading] = useState(false);
   const [sessionId, setSessionId] = React.useState(null);
   const navigation = useNavigation()
 
@@ -22,10 +23,10 @@ export const AuthProvider = ({children}) => {
     //     body: {token: response.params.id_token},
     //     method: "post",
     //   })
-    console.log(response.params.id_token, "token")
-      if (response.type == "success"){
+    console.log(response?.params?.id_token, "token")
+      if (response?.type == "success"){
         const responses = await axios.post("https://spitfire.onrender.com/api/auth", {
-          token: response.params.id_token,
+          token: response?.params?.id_token,
         },
         {
           headers: {
@@ -39,6 +40,7 @@ export const AuthProvider = ({children}) => {
       AsyncStorage.setItem("userInfo", JSON.stringify({
         user : responses.data,
         session: responses.headers["set-cookie"],
+        expires: ""
       })).then(() => navigation.navigate('Loading'))
       
     }
@@ -56,7 +58,10 @@ export const AuthProvider = ({children}) => {
         }
       }
     )
-    console.log(responses)
+    if(responses) { 
+      AsyncStorage.removeItem("userInfo")
+      alert('Logged out Successfully');
+    }
   }
 
 
@@ -138,27 +143,32 @@ export const AuthProvider = ({children}) => {
   //     });
   // };
 
-  // const isLoggedIn = async () => {
-  //   try {
-  //     setSplashLoading(true);
+  const isLoggedIn = async () => {
+    try {
+      setIsLoading(true);
 
-  //     let userInfo = await AsyncStorage.getItem('userInfo');
-  //     userInfo = JSON.parse(userInfo);
+      let userInfo = await AsyncStorage.getItem('userInfo');
+      userInfo = JSON.parse(userInfo);
 
-  //     if (userInfo) {
-  //       setUserInfo(userInfo);
-  //     }
+      if (userInfo && (/* userInfo.expires */true)) {
+        setUserInfo(userInfo.user);
+        setSessionId(userInfo.sessionId)
+      
+        navigation.reset({
+          index: 0,
+          routes: [{name: "Tabs"}]
+        })
+      }
+      setIsLoading(false);
+    } catch (e) {
+      setIsLoading(false);
+      // alert(`is logged in error ${e}`);
+    }
+  };
 
-  //     setSplashLoading(false);
-  //   } catch (e) {
-  //     setSplashLoading(false);
-  //     alert(`is logged in error ${e}`);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   isLoggedIn();
-  // }, []);
+  useEffect(() => {
+    isLoggedIn();
+  }, []);
 
   React.useEffect(() => {
     webBrowser.maybeCompleteAuthSession();
@@ -173,6 +183,7 @@ export const AuthProvider = ({children}) => {
         setUserInfo,
         promptAsync,
         response,
+        handleLogout,
         // register,
         // login,
         // logout,

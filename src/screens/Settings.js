@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const Settings = () => {
   const navigation = useNavigation();
-  // const {userInfo} = useContext(AuthContext);
+  const {handleLogout} = useContext(AuthContext);
   
   return (
     <View
@@ -289,9 +289,11 @@ salome357@gmail.com
       <TouchableOpacity
         style={{
           flexDirection: "row",
-        }} onPress={()=> { navigation.goBack();
-          navigation.goBack();
-          alert('Logged out Successfully');
+        }} onPress={()=> { 
+          // navigation.goBack();
+          // navigation.goBack();
+          handleLogout()
+          // alert('Logged out Successfully');
         }}
       >
         <SimpleLineIcons name="logout" size={24} color="#EA3131" style={{
