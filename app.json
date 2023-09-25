@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "spitfire",
-    "slug": "spitfire",
+    "slug": "spitfire-apk",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -31,7 +31,7 @@
     "scheme": "myapp",
     "extra": {
       "eas": {
-        "projectId": "21113237-63a4-4688-85fa-072a6c3966a3"
+
       }
     }
   }

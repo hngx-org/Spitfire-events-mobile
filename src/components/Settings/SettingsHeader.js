@@ -10,7 +10,7 @@ const SettingsHeader = () => {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingTop: Platform.OS==='ios'? 35 : 0,
+        paddingTop: Platform.OS==='ios'? 45 : 0,
       }}
     >
       <TextOpen

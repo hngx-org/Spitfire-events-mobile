@@ -4,35 +4,27 @@ import {Calendar, LocaleConfig} from "react-native-calendars";
 import EventDetails from "../components/CalendarScreen/EventDetails";
 import CalendarHeader from "../components/CalendarScreen/CalendarHeader";
 import axios from "axios";
+
+// import eventData from "../services/EventData";
 import { useDataContext } from "../hooks/useDataContext";
-import EventsItem from "../components/EventsItem";
 
 const CalendarScreen = () => {
   const [markedDates, setMarkedDates] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
-  // const [events, setEvents] = useState([]);
-  const {events, dispatch} = useDataContext()
+  const [events, setEvents] = useState([]);
+  const {data:eventData, dispatch} = useDataContext();
 
-  // useEffect(() => {
-  //   // Fetch event data from your API here and update the 'events' state.
-  //   // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint.
-  //   axios
-  //     .get("YOUR_API_ENDPOINT")
-  //     .then((response) => {
-  //       const eventData = response.data;
+//  useEffect(() => {
+   // Use the eventData array instead of fetching data from an API
+//    const marked = {};
+//    eventData.data.forEach((event) => {
+//      marked[event.date] = {marked: true};
+//    });
 
-  //       const marked = {};
-  //       eventData.forEach((event) => {
-  //         marked[event.date] = {marked: true};
-  //       });
+//    setMarkedDates(marked);
+//    setEvents(eventData.data);
+//  }, []);
 
-  //       setMarkedDates(marked);
-  //       setEvents(eventData);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }, []);
   // useEffect(() => {
   //   axios
   //     .get(
@@ -40,20 +32,42 @@ const CalendarScreen = () => {
   //     )
   //     .then((res) => {
   //       const eventData = res.data;
+  //       const marked = {};
+  //       eventData.forEach((event) => {
+  //         marked[event.date] = {marked: true};
+  //       });
+
+  //       setMarkedDates(marked);
+  //       setEvents(eventData);
+  //       console.log(eventData);
   //     })
   //     .catch((e) => {
   //       alert(`Error while getting event ${e}`);
-  //       setIsLoading(false);
   //     });
 
-  //   const marked = {};
-  //   eventData.forEach((event) => {
-  //     marked[event.date] = {marked: true};
-  //   });
-
-  //   setMarkedDates(marked);
-  //   setEvents(eventData);
+    
   // }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch(
+  //       `https://spitfire.onrender.com/api/events`,
+  //       {}
+  //     );
+  //     const eventData = await response.json();
+  //     console.log('hello');
+  //     const marked = {};
+  //     eventData.forEach((event) => {
+  //       marked[event.date] = {marked: true};
+  //     });
+
+  //     setMarkedDates(marked);
+  //     setEvents(eventData);
+  //   };
+
+  //   fetchData();
+  // }, []);
+
 
   useEffect(()=>{
 
@@ -71,6 +85,13 @@ const CalendarScreen = () => {
     
     fetchData()
     
+    const marked = {};
+   eventData.data.forEach((event) => {
+     marked[event.start_date] = {marked: true};
+   });
+
+   setMarkedDates(marked);
+   setEvents(eventData.data);
     
 }, [])
 
@@ -91,6 +112,7 @@ const CalendarScreen = () => {
   return (
     <View
       style={{
+        paddingTop: 18,
         flex: 1,
         paddingHorizontal: 24,
         backgroundColor: "#FFFCFD",
@@ -105,7 +127,7 @@ const CalendarScreen = () => {
         }}
       >
         <Calendar
-        style={{borderRadius: 15,}}
+          style={{borderRadius: 15}}
           markedDates={markedDates}
           onDayPress={(day) => {
             setSelectedDate(day.dateString);
@@ -117,18 +139,9 @@ const CalendarScreen = () => {
       {selectedDate && (
         <View>
           <FlatList
-            data={events.data.filter((event) => event.start_date === selectedDate)}
+            data={events.filter((event) => event.start_date === selectedDate)}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={
-              <EventsItem   
-                title = {item.description}
-                date = {item.start_date}
-                start_time = {item.start_time}
-                end_time = {item.end_time}
-                location = {item.location}
-              />
-            }
-            
+            renderItem={EventDetails}
           />
         </View>
       )}
