@@ -11,7 +11,7 @@ const CalendarScreen = () => {
   const [markedDates, setMarkedDates] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   // const [events, setEvents] = useState([]);
-  const {events, dispatch} = useDataContext()
+  const {data:events, dispatch} = useDataContext()
 
   // useEffect(() => {
   //   // Fetch event data from your API here and update the 'events' state.
