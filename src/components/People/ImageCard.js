@@ -6,7 +6,9 @@ const ImageCard = ({data}) => {
   return (
     <View style={styles.container}>
         <Text style={styles.constainerText}>{data.name}</Text>
+        <View style={styles.img}>
         <Image source={data.img}/>
+    </View>
     </View>
   )
 }
@@ -19,6 +21,8 @@ const styles = StyleSheet.create({
         backgroundColor: colors.light   
     },
     constainerText: {
-        padding: 5
-    }
+        padding: 10,
+        fontWeight: 'bold',
+        fontSize: 19,
+    },
 })

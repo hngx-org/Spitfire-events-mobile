@@ -3,15 +3,16 @@ import React from 'react';
 import { Card } from '../components/Techies';
 import colors from '../layouts/colors';
 import TechiesHeader from '../components/Techies/techiesHeader';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 const Techies = () => {
 
-
+  const route = useRoute();
 
 
   return (
     <SafeAreaView style={styles.container}>
-      <TechiesHeader title='Techies' member='11 members' />
+      <TechiesHeader title={route.params.name} member={route.params.members} />
       
         <View style={styles.today}>
         <Text style={styles.todaytext}>Today</Text>
