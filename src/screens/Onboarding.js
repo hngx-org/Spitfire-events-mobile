@@ -19,8 +19,8 @@ import { StatusBar } from "expo-status-bar";
 import logo from "../../assets/icons/logo.png";
 import { useNavigation } from '@react-navigation/native';
 
-const Onboarding = () => {
-  const navigation = useNavigation();
+const Onboarding = ({navigation}) => {
+  // const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.img} />

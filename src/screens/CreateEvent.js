@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, Pressable, Image, Alert } from 'react-native'
-import React, { useState, useReducer } from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
 import Constants from "expo-constants"
 import DateTimePicker from "@react-native-community/datetimepicker"
 import colors from "../layouts/colors"
@@ -53,6 +53,7 @@ const CreateEvent = () => {
   const [endDate, setEndDate] = useState(null);
   const [startTime, setStartTime] = useState(null)
   const [endTime, setEndTime] = useState(null);
+  const [isError, setIsError] = useState(false);
   //This below is essential for passing data between screens, accessing the navigation props. AND ADDING A FUNCTIONAL ELEMENT(AND ICONS) TO THE DEFAULT HEADER, before this useNavigation can be used, the component has to in one way or the other(directly or indirectly) be wrapped in a navigatorContainer
 const navigation = useNavigation();
 
@@ -74,6 +75,10 @@ const {data, dispatch: dispatcher} = useDataContext()
   const [formatted, setFormatted] = useState({})
   
   const onSubmit = async () => {
+    if (!startDate || !startTime || !endDate || !endTime || !newEvent.description || !newEvent.location) {
+      setIsError(true)
+      return;
+    }
 
     setNewEvent({
       ...newEvent,
@@ -83,7 +88,13 @@ const {data, dispatch: dispatcher} = useDataContext()
     })
 
 
-    const Event = newEvent
+    const Event = {
+      ...newEvent,
+      start_date: startDate,
+      start_time: startTime,
+      end_date: endDate,
+      end_time: endTime,
+    }
     // Alert.alert('successfully created', JSON.stringify(Event))
     // const response = await fetch(`https://spitfire.onrender.com/api/events`, {
     //         method: 'POST',
@@ -113,6 +124,12 @@ const {data, dispatch: dispatcher} = useDataContext()
         })
 
     const json = await response.json()
+    // console.log(Event, ":  :  :  :  :  :  Event")
+    // console.log(response, ":  :  :  :  :  :  response")
+    // console.log(startDate, ":  :  :  :  :  :  startDate")
+    // console.log(startTime, ":  :  :  :  :  :  startTime")
+    // console.log(response, ":  :  :  :  :  :  response")
+    // console.log(response, ":  :  :  :  :  :  response")
 
     if(!response.ok){
       Alert.alert('An Error occured while creating new event', JSON.stringify(json.message))
@@ -124,6 +141,12 @@ const {data, dispatch: dispatcher} = useDataContext()
     }
   }
 
+  useEffect(() => {
+    // first
+    Alert.alert('Please fill in the necessary fields')
+  }, [isError])
+  
+
   return (
     <View style = { styles.container}>
     
@@ -132,10 +155,10 @@ const {data, dispatch: dispatcher} = useDataContext()
         value = {date}
         mode = {"date"}
         onChange = {(e, selectedDate) => {
-          setStartDate(selectedDate)
+          if (e.type == "set") {setStartDate(`${selectedDate.getUTCFullYear()}-${(selectedDate.getUTCMonth() + 1) < 10 ? "0" + (selectedDate.getUTCMonth() + 1) : selectedDate.getUTCMonth()+ 1}-${selectedDate.getUTCDate() < 10 ? `0${selectedDate.getUTCDate()}` : selectedDate.getUTCDate()}`)
           setFormatted({...formatted, startDate: `${selectedDate.getUTCDate()}/${(selectedDate.getUTCMonth() + 1) < 10 ? "0" + (selectedDate.getUTCMonth() + 1) : selectedDate.getUTCMonth()+ 1}/${selectedDate.getUTCFullYear()}`});
-          setNewEvent({...newEvent, start_date: selectedDate})
-          dispatch({type: "START_DATE_CLOSE"})
+          setNewEvent((prevEvent) => { return {...prevEvent, start_date: selectedDate}})
+          dispatch({type: "START_DATE_CLOSE"})}
         }}
         minimumDate = {new Date()}
         
@@ -145,10 +168,10 @@ const {data, dispatch: dispatcher} = useDataContext()
         value = {date}
         mode = {"date"}
         onChange = {(e, selectedDate) => {
-          setEndDate(selectedDate)
+          if (e.type == "set") {setEndDate(`${selectedDate.getUTCFullYear()}-${(selectedDate.getUTCMonth() + 1) < 10 ? "0" + (selectedDate.getUTCMonth() + 1) : selectedDate.getUTCMonth()+ 1}-${selectedDate.getUTCDate() < 10 ? `0${selectedDate.getUTCDate()}` : selectedDate.getUTCDate()}`)
           setFormatted({...formatted, endDate: `${selectedDate.getUTCDate()}/${(selectedDate.getUTCMonth() + 1) < 10 ? "0" + (selectedDate.getUTCMonth() + 1) : selectedDate.getUTCMonth()+ 1}/${selectedDate.getUTCFullYear()}`});
-          setNewEvent({...newEvent, end_date: selectedDate})
-          dispatch({type: "END_DATE_CLOSE"})
+          setNewEvent((prevEvent) => { return {...prevEvent, end_date: selectedDate}})
+          dispatch({type: "END_DATE_CLOSE"})}
           
         }}
         minimumDate = {newEvent.startDate}
@@ -160,10 +183,10 @@ const {data, dispatch: dispatcher} = useDataContext()
         value = {date}
         mode = {"time"}
         onChange = {(e, selectedDate) => {
-          setStartTime(selectedDate)
-          setFormatted({...formatted, startDate: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
-          setNewEvent({...newEvent, start_time: selectedDate})
-          dispatch({type: "START_TIME_CLOSE"})
+          if (e.type == "set") {setStartTime(`${selectedDate.getUTCHours() < 10 ? `0${selectedDate.getUTCHours()}` : selectedDate.getUTCHours()}:${selectedDate.getUTCMinutes() < 10 ? `0${selectedDate.getUTCMinutes()}` : selectedDate.getUTCMinutes()}:${selectedDate.getUTCSeconds() < 10 ? `0${selectedDate.getUTCSeconds()}` : selectedDate.getUTCSeconds()}`)
+          setFormatted({...formatted, startTime: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
+          setNewEvent((prevEvent) => { return {...prevEvent, start_time: selectedDate}})
+          dispatch({type: "START_TIME_CLOSE"})}
         }}
         minimumDate = {new Date()}
       />}
@@ -173,10 +196,10 @@ const {data, dispatch: dispatcher} = useDataContext()
         value = {date}
         mode = {"time"}
         onChange = {(e, selectedDate) => {
-          setEndTime(selectedDate)
-          setFormatted({...formatted, endDate: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
-          setNewEvent({...newEvent, end_time: selectedDate})
-          dispatch({type: "END_TIME_CLOSE"})
+          if (e.type == "set") {setEndTime(`${selectedDate.getUTCHours() < 10 ? `0${selectedDate.getUTCHours()}` : selectedDate.getUTCHours()}:${selectedDate.getUTCMinutes() < 10 ? `0${selectedDate.getUTCMinutes()}` : selectedDate.getUTCMinutes()}:${selectedDate.getUTCSeconds() < 10 ? `0${selectedDate.getUTCSeconds()}` : selectedDate.getUTCSeconds()}`)
+          setFormatted({...formatted, endTime: `${(selectedDate.getUTCHours() + 1) < 10 ? "0" + (selectedDate.getUTCHours() + 1) : selectedDate.getUTCHours()+ 1}:${(selectedDate.getUTCMinutes() + 1) < 10 ? "0" + (selectedDate.getUTCMinutes()) : selectedDate.getUTCMinutes()}`});
+          setNewEvent((prevEvent) => { return {...prevEvent, end_time: selectedDate}})
+          dispatch({type: "END_TIME_CLOSE"})}
         }}
         minimumDate = {newEvent.startDate}
       />}
@@ -198,7 +221,7 @@ const {data, dispatch: dispatcher} = useDataContext()
             font = {"OpenSans_600SemiBold"}
           >Event Description</TextOpen>
           <CreateEventInputBox
-            onChangeText = {(val) => setNewEvent({...newEvent, description: val})}
+            onChangeText = {(val) => setNewEvent((prevEvent) => { return {...prevEvent, description: val}})}
             button = {false}
             numberOfLines = {1}
           />
@@ -214,7 +237,7 @@ const {data, dispatch: dispatcher} = useDataContext()
             iconSrc = {require("../../assets/icons/location-icon.png")}
             btnText = {"Add Location"}
             numberOfLines = {1}
-            onChangeText = {(val) => setNewEvent({...newEvent, location : val})}
+            onChangeText = {(val) => setNewEvent((prevEvent) => { return {...prevEvent, location : val}})}
           />
         </View>
         
@@ -304,7 +327,7 @@ const {data, dispatch: dispatcher} = useDataContext()
             textStyle={{ fontSize: 16, }}
             onSelectItem={(val) => {
               setSelectedGroup(val.label)
-              setNewEvent({...newEvent, group: val.label})
+              setNewEvent((prevEvent) => { return {...prevEvent, group: val.label}})
               setOpenDropdown(false);
             }}
             labelStyle={{ fontSize: 16, }}
