@@ -1,21 +1,35 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ToastAndroid,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React, {useContext} from "react";
 import SettingsHeader from "../components/Settings/SettingsHeader";
 import TextOpen from "../components/TextOpen";
 import {Ionicons} from "@expo/vector-icons";
 import {SimpleLineIcons} from "@expo/vector-icons";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigation } from '@react-navigation/native';
+import {AuthContext} from "../context/AuthContext";
+import {useNavigation} from "@react-navigation/native";
+
+import {useUser, useAuth} from "@clerk/clerk-expo";
 
 const Settings = () => {
   const navigation = useNavigation();
-  // const {userInfo} = useContext(AuthContext);
-  
+  const {user} = useUser();
+
+  const { isLoaded, signOut } = useAuth();
+  if (!isLoaded) {
+    return null;
+  }
+
   return (
     <View
       style={{
         flex: 1,
-        paddingTop: 10,
+        paddingTop: 30,
         paddingHorizontal: 24,
         backgroundColor: "#FFFCFD",
       }}
@@ -42,7 +56,9 @@ const Settings = () => {
           >
             <Image
               style={{width: 62, height: 62, borderRadius: 40}}
-              source={require('../../assets/profile.jpg')}
+              source={{
+                uri: user.imageUrl,
+              }}
             />
           </View>
           <TextOpen
@@ -52,8 +68,7 @@ const Settings = () => {
               fontSize: 15,
             }}
           >
-            {/* {userInfo.name} */}
-Salome
+            {user.fullName}
           </TextOpen>
           <TextOpen
             style={{
@@ -61,8 +76,7 @@ Salome
               fontSize: 12,
             }}
           >
-            {/* {userInfo.email} */}
-salome357@gmail.com
+            {user.username}
           </TextOpen>
         </View>
       </View>
@@ -217,7 +231,7 @@ salome357@gmail.com
           borderColor: "#F4C6FF",
           padding: 16,
           backgroundColor: "#F0E8F2",
-          marginBottom: 30
+          marginBottom: 30,
         }}
       >
         <View
@@ -289,15 +303,21 @@ salome357@gmail.com
       <TouchableOpacity
         style={{
           flexDirection: "row",
-        }} onPress={()=> { navigation.goBack();
-          navigation.goBack();
-          alert('Logged out Successfully');
+        }}
+        onPress={() => {
+          signOut;
+          ToastAndroid.show("Logged out successfully", ToastAndroid.SHORT);
         }}
       >
-        <SimpleLineIcons name="logout" size={24} color="#EA3131" style={{
-          marginLeft: 10,
-          marginRight: 10
-        }} />
+        <SimpleLineIcons
+          name="logout"
+          size={24}
+          color="#EA3131"
+          style={{
+            marginLeft: 10,
+            marginRight: 10,
+          }}
+        />
         <TextOpen
           style={{
             fontSize: 16,

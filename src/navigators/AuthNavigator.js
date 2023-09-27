@@ -12,7 +12,7 @@ const AuthNavigator = () => {
         headerShown: false,
       }}
     >
-      {/* <Stack.Screen name="Onboarding" component={Onboarding} /> */}
+      <Stack.Screen name="Onboarding" component={Onboarding} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>

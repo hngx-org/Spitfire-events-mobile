@@ -11,16 +11,34 @@ import CustomBouton from "../components/onboarding/Bouton";
 import Constants from "expo-constants";
 import colors from "../layouts/colors";
 import TextOpen from "../components/TextOpen";
-
-
-import openSans from "../layouts/fonts";
-import Input from "../components/onboarding/Input";
-import { StatusBar } from "expo-status-bar";
 import logo from "../../assets/icons/logo.png";
-import { useNavigation } from '@react-navigation/native';
+
+import * as WebBrowser from "expo-web-browser";
+import {useOAuth} from "@clerk/clerk-expo";
+import {useWarmUpBrowser} from "../hooks/warmUpBrowser";
+
+WebBrowser.maybeCompleteAuthSession();
 
 const Onboarding = ({navigation}) => {
-  // const navigation = useNavigation();
+  useWarmUpBrowser();
+
+  const {startOAuthFlow} = useOAuth({strategy: "oauth_google"});
+
+  const onPress = React.useCallback(async () => {
+    try {
+      const {createdSessionId, signIn, signUp, setActive} =
+        await startOAuthFlow();
+
+      if (createdSessionId) {
+        setActive({session: createdSessionId});
+      } else {
+        // Use signIn or signUp for next steps such as MFA
+      }
+    } catch (err) {
+      alert("OAuth error", err);
+    }
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.img} />
@@ -29,10 +47,10 @@ const Onboarding = ({navigation}) => {
           <TextOpen font={"OpenSans_600SemiBold"} style={styles.welcome}>
             Welcome on board
           </TextOpen>
-          <TouchableOpacity 
-          // onPress={() => navigation.navigate("Register")}
-            onPress={() => navigation.navigate("Loading")}
-            >
+          <TouchableOpacity
+            // onPress={() => navigation.navigate("Register")}
+            onPress={onPress}
+          >
             <TextOpen style={styles.signText}>Create an account</TextOpen>
           </TouchableOpacity>
         </View>
@@ -40,14 +58,12 @@ const Onboarding = ({navigation}) => {
           <CustomBouton
             label={"Continue with Google"}
             provider={"google"}
-            // onPress={() => promptAsync()}
-            onPress={() => navigation.navigate("Loading")}
+            onPress={onPress}
           />
           <View style={styles.bottom}>
             <TextOpen style={styles.login}>Have an account ? </TextOpen>
-            <TouchableOpacity 
-            // onPress={() => promptAsync()}
-            onPress={() => navigation.navigate("Loading")}
+            <TouchableOpacity
+              onPress={onPress}
             >
               <TextOpen style={styles.log}>Login</TextOpen>
             </TouchableOpacity>
@@ -95,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
 
     color: colors.secondary,
-    
+
     ...Platform.select({
       ios: {
         marginHorizontal: 24,
@@ -110,6 +126,5 @@ const styles = StyleSheet.create({
     }),
 
     color: "#33313E",
-
   },
 });
