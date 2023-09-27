@@ -76,7 +76,8 @@ const Settings = () => {
               fontSize: 12,
             }}
           >
-            {user.username}
+            {user.firstName}
+            {user.lastName}@gmail.com
           </TextOpen>
         </View>
       </View>
@@ -305,7 +306,7 @@ const Settings = () => {
           flexDirection: "row",
         }}
         onPress={() => {
-          signOut;
+          navigation.goBack();
           ToastAndroid.show("Logged out successfully", ToastAndroid.SHORT);
         }}
       >
