@@ -11,7 +11,6 @@ const CalendarHeader = () => {
         height: 48,
         justifyContent: "space-between",
         alignItems: "center",
-        paddingTop: 15,
         marginTop: 15,
       }}
     >

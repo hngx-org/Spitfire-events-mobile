@@ -11,63 +11,34 @@ import CustomBouton from "../components/onboarding/Bouton";
 import Constants from "expo-constants";
 import colors from "../layouts/colors";
 import TextOpen from "../components/TextOpen";
-
-
-import openSans from "../layouts/fonts";
-import Input from "../components/onboarding/Input";
-import { StatusBar } from "expo-status-bar";
 import logo from "../../assets/icons/logo.png";
-import { useNavigation } from '@react-navigation/native';
-//uncomment these three
-// import * as webBrowser from "expo-web-browser";
-// import * as Google from "expo-auth-session/providers/google";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// webBrowser.maybeCompleteAuthSession();
+import * as WebBrowser from "expo-web-browser";
+import {useOAuth} from "@clerk/clerk-expo";
+import {useWarmUpBrowser} from "../hooks/warmUpBrowser";
 
-// IOS : 176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com
-// Android : 176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com
+WebBrowser.maybeCompleteAuthSession();
 
-const Onboarding = (
-  // { navigation }
-  ) => {
-  const navigation = useNavigation();
-//   const [userInfo, setUserInfo] = React.useState(null);
-//   const handleLoginWithGoogle = () => {};
+const Onboarding = ({navigation}) => {
+  useWarmUpBrowser();
 
-//   // handling google auth
-//   const [request, response, promptAsync] = Google.useAuthRequest({
-//     androidClientId:
-//       "176112084291-j6rruls1vpmnhnfsjctpe555tgm9o9p7.apps.googleusercontent.com",
-//     iosClientId:
-//       "176112084291-3i88bccbt5jp8urq0vgu50nudoath8k2.apps.googleusercontent.com",
-//   });
+  const {startOAuthFlow} = useOAuth({strategy: "oauth_google"});
 
-//   React.useEffect(() => {
-//     handleSignWithGoogl();
-//   }, [response]);
+  const onPress = React.useCallback(async () => {
+    try {
+      const {createdSessionId, signIn, signUp, setActive} =
+        await startOAuthFlow();
 
-  // Test if user is already connected
-  // async function handleSignWithGoogl() {
-  //   const user = await AsyncStorage.getItem("@user");
-  //   if (!user) {
-  //     if (response?.type === "success") {
-  //       await getUserInfo(response.authentication.accessToken);
-  //     }
-  //   } else {
-  //     setUserInfo(JSON.parse(user));
-  //   }
-  // }
+      if (createdSessionId) {
+        setActive({session: createdSessionId});
+      } else {
+        // Use signIn or signUp for next steps such as MFA
+      }
+    } catch (err) {
+      alert("OAuth error", err);
+    }
+  }, []);
 
-  // get user info from google
-  // const getUserInfo = async (token) => {
-  //   const response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   });
-  //   const user = await response.json();
-  //   await AsyncStorage.setItem("@user", JSON.stringify(user));
-  //   setUserInfo(user);
-  // };
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.img} />
@@ -76,10 +47,10 @@ const Onboarding = (
           <TextOpen font={"OpenSans_600SemiBold"} style={styles.welcome}>
             Welcome on board
           </TextOpen>
-          <TouchableOpacity 
-          // onPress={() => navigation.navigate("Register")}
-            onPress={() => navigation.navigate("Loading")}
-            >
+          <TouchableOpacity
+            // onPress={() => navigation.navigate("Register")}
+            onPress={onPress}
+          >
             <TextOpen style={styles.signText}>Create an account</TextOpen>
           </TouchableOpacity>
         </View>
@@ -87,14 +58,12 @@ const Onboarding = (
           <CustomBouton
             label={"Continue with Google"}
             provider={"google"}
-            // onPress={() => promptAsync()}
-            onPress={() => navigation.navigate("Loading")}
+            onPress={onPress}
           />
           <View style={styles.bottom}>
             <TextOpen style={styles.login}>Have an account ? </TextOpen>
-            <TouchableOpacity 
-            // onPress={() => promptAsync()}
-            onPress={() => navigation.navigate("Loading")}
+            <TouchableOpacity
+              onPress={onPress}
             >
               <TextOpen style={styles.log}>Login</TextOpen>
             </TouchableOpacity>
@@ -142,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
 
     color: colors.secondary,
-    
+
     ...Platform.select({
       ios: {
         marginHorizontal: 24,
@@ -157,6 +126,5 @@ const styles = StyleSheet.create({
     }),
 
     color: "#33313E",
-
   },
 });

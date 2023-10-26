@@ -5,24 +5,25 @@ import EventDetails from "../components/CalendarScreen/EventDetails";
 import CalendarHeader from "../components/CalendarScreen/CalendarHeader";
 import axios from "axios";
 
-import eventData from "../services/EventData";
+// import eventData from "../services/EventData";
+import { useDataContext } from "../hooks/useDataContext";
 
 const CalendarScreen = () => {
   const [markedDates, setMarkedDates] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [events, setEvents] = useState([]);
-  // const {events, dispatch} = useDataContext();
+  const {data:eventData, dispatch} = useDataContext();
 
- useEffect(() => {
+//  useEffect(() => {
    // Use the eventData array instead of fetching data from an API
-   const marked = {};
-   eventData.forEach((event) => {
-     marked[event.date] = {marked: true};
-   });
+//    const marked = {};
+//    eventData.data.forEach((event) => {
+//      marked[event.date] = {marked: true};
+//    });
 
-   setMarkedDates(marked);
-   setEvents(eventData);
- }, []);
+//    setMarkedDates(marked);
+//    setEvents(eventData.data);
+//  }, []);
 
   // useEffect(() => {
   //   axios
@@ -67,6 +68,33 @@ const CalendarScreen = () => {
   //   fetchData();
   // }, []);
 
+
+  useEffect(()=>{
+
+    const fetchData = async () => {
+        const response = await fetch(`https://spitfire.onrender.com/api/events`, {
+      
+        })
+        const json = await response.json()
+
+        if(response.ok){
+            dispatch({type: 'SET_DATA', payload: json})
+    
+        }    
+    }
+    
+    fetchData()
+    
+    const marked = {};
+   eventData.data.forEach((event) => {
+     marked[event.start_date] = {marked: true};
+   });
+
+   setMarkedDates(marked);
+   setEvents(eventData.data);
+    
+}, [])
+
   const calendarTheme = {
     calendarBackground: "#F0E8F2", // Background color of the calendar
     dayTextColor: "#87748C", // Text color of regular day numbers
@@ -84,7 +112,7 @@ const CalendarScreen = () => {
   return (
     <View
       style={{
-        paddingTop: 18,
+        paddingTop: 3,
         flex: 1,
         paddingHorizontal: 24,
         backgroundColor: "#FFFCFD",
@@ -111,7 +139,7 @@ const CalendarScreen = () => {
       {selectedDate && (
         <View>
           <FlatList
-            data={events.filter((event) => event.date === selectedDate)}
+            data={events.filter((event) => event.start_date === selectedDate)}
             keyExtractor={(item) => item.id.toString()}
             renderItem={EventDetails}
           />
