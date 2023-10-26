@@ -31,7 +31,6 @@
     "scheme": "myapp",
     "extra": {
       "eas": {
-
       }
     }
   }
